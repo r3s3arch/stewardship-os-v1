@@ -1,2 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
 :root{--navy:#142238;--navy2:#20344b;--gold:#bb9556;--gold-light:#e8cf99;--paper:#f7f2e8;--cream:#fffdf8;--ink:#1d2c3a;--muted:#65707b;--line:#dfd5c4;--sage:#526d5d}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.app-shell{max-width:980px;min-height:100vh;margin:auto;background:var(--cream);box-shadow:0 0 70px #18273b14}.masthead{display:flex;align-items:center;gap:16px;background:var(--navy);color:#fff;padding:20px clamp(18px,5vw,42px);border-bottom:2px solid var(--gold)}.brandmark{display:grid;place-items:center;width:49px;height:49px;border:1px solid var(--gold);color:var(--gold-light);font-size:28px;border-radius:50%}.masthead h1{font:600 clamp(27px,4vw,37px)/1 'Cormorant Garamond',Georgia,serif;margin:2px 0}.masthead h1 em{font-style:normal;color:var(--gold-light);font-size:.57em;letter-spacing:.15em}.eyebrow,.section-kicker,.panel-label{font-size:10px;font-weight:700;letter-spacing:.24em;color:var(--gold-light)}.motto{font:italic 15px 'Cormorant Garamond',Georgia,serif;color:#dfd4c0}.version{margin-left:auto;font-size:10px;color:#9daabb;align-self:flex-start}.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:#192a40;padding:0 18px}.tab{border:0;border-bottom:3px solid transparent;background:transparent;color:#bdc5ce;padding:14px 10px;font-weight:600;letter-spacing:.06em}.tab.active{border-bottom-color:var(--gold-light);color:#fff;background:#ffffff0a}.tab span{margin-left:5px}.view{display:none}.view.active{display:block}main{min-height:60vh}.prayer-sanctuary{min-height:740px;background:linear-gradient(180deg,#0d192bb5,#0d192be6 58%,#0d192bf2),url('assets/christ-icon.svg') center 18%/min(100%,700px) auto no-repeat,#19283a;color:#fff;position:relative;text-align:center}.sanctuary-overlay{padding:45px clamp(18px,5vw,60px) 65px;max-width:780px;margin:auto}.prayer-sanctuary h2,.page-intro h2{font:500 clamp(42px,8vw,72px)/.97 'Cormorant Garamond',Georgia,serif;margin:17px 0 14px}.prayer-sanctuary h2 i{color:var(--gold-light);font-weight:500}.rule{color:var(--gold-light);font-size:25px}.prayer-subtitle{color:#eee3d0;max-width:440px;margin:8px auto 24px;font-size:14px}.prayer-clock{font:500 clamp(66px,13vw,105px)/1 'Cormorant Garamond',Georgia,serif;letter-spacing:.035em;font-variant-numeric:tabular-nums;text-shadow:0 2px 24px #0009}.prayer-progress,.timer-track{height:5px;border-radius:10px;background:#ffffff2a;overflow:hidden;max-width:400px;margin:15px auto 22px}.prayer-progress>div,.timer-track>div{height:100%;width:0;background:var(--gold-light);transition:width .25s}.prayer-stage{font-size:11px;font-weight:700;letter-spacing:.23em;color:var(--gold-light);margin-bottom:12px}.prayer-card{background:#142238d9;border:1px solid #d3b77a65;border-radius:3px;max-width:630px;min-height:250px;margin:0 auto 22px;padding:24px clamp(17px,4vw,37px);box-shadow:0 16px 50px #0004}.prayer-source{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-light)}.prayer-text{font:500 clamp(21px,3vw,28px)/1.33 'Cormorant Garamond',Georgia,serif;white-space:pre-line;margin:16px 0}.prayer-reference{font-size:12px;color:#d4c8b3}.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.prayer-sanctuary .button-row{justify-content:center}.btn{border:1px solid transparent;border-radius:4px;padding:12px 20px;font-weight:700;font-size:13px;min-height:45px;transition:transform .15s,background .15s}.btn:active{transform:scale(.98)}.btn.gold{background:var(--gold-light);color:#1b2633}.btn.outline-light{background:transparent;color:#fff;border-color:#e8cf9980}.btn.primary{background:var(--navy);color:white}.btn.secondary{background:#e9dfcd;color:var(--ink)}.btn.subtle{background:#f7f3eb;border-color:var(--line);color:var(--ink)}.btn.full{width:100%;display:flex;justify-content:space-between;margin-top:20px}.toggle-light,.small-light{display:block;color:#ddd2c1;font-size:12px;margin:18px auto 0}.toggle-light input{accent-color:var(--gold)}.small-light{max-width:500px;opacity:.7}.page-intro{padding:40px clamp(20px,5vw,45px) 18px}.section-kicker.dark{color:#8c6c39}.page-intro h2{color:var(--navy);margin:8px 0}.page-intro h2 i{color:#99713a}.page-intro>p{color:var(--muted);font-size:14px;max-width:570px}.panel{margin:18px clamp(16px,5vw,45px) 30px;padding:clamp(20px,4vw,32px);background:#fff;border:1px solid var(--line);box-shadow:0 8px 24px #2c26190a;border-radius:5px}.panel-label{color:#92703b;margin-bottom:18px}.panel label:not(.btn){display:block;margin:17px 0 6px;font-weight:700;font-size:13px}.panel input:not([type=checkbox]):not([type=file]),.panel select,.panel textarea{display:block;width:100%;background:#fdfbf6;border:1px solid #cfc5b5;border-radius:4px;padding:12px;color:var(--ink);min-height:47px}.panel textarea{resize:vertical}.panel input:focus,.panel select:focus,.panel textarea:focus{outline:2px solid #bb95568c;outline-offset:1px}.exercise-description{font-size:13px;color:var(--muted);margin:9px 0}.text-button{padding:8px 0;border:0;background:none;color:#8c652f;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px}.subpanel{background:#f9f5ed;border:1px solid var(--line);padding:16px;margin:10px 0 20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.options{display:flex;gap:18px;flex-wrap:wrap;margin-top:15px}.options label{font-weight:500!important}.options input{accent-color:var(--navy)}.workout-preview{margin:18px 0 0;padding:13px;background:#f4efe4;border-left:3px solid var(--gold);font-size:13px}.hint{font-size:12px;color:var(--muted)}.hidden{display:none!important}.workout-active{text-align:center;padding:55px 20px 65px}.workout-active h2{font:600 clamp(34px,7vw,58px) 'Cormorant Garamond',Georgia,serif;margin:8px 0 25px}.round-label{font-size:13px;font-weight:700;letter-spacing:.18em;color:#8d6c3c}.big-timer{font:500 clamp(90px,20vw,180px)/1 'Cormorant Garamond',Georgia,serif;font-variant-numeric:tabular-nums;color:var(--navy);margin:20px 0}.timer-track{background:#e8dfd2;max-width:550px}.timer-track>div{background:var(--gold)}.rep-callout{font:600 26px 'Cormorant Garamond',Georgia,serif;color:#89642e}.timer-message{font-size:13px;color:var(--muted)}.center{text-align:center;justify-content:center}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.summary-grid>div{padding:12px;background:#f8f3e9}.summary-grid strong{display:block;font-size:22px;color:var(--navy)}.summary-grid span{font-size:11px;color:var(--muted)}.optional{font-weight:400;color:#8c8c88}.autosave{font-size:12px;color:var(--sage)}blockquote{margin:25px 0 0;border-top:1px solid var(--line);padding-top:20px;font:italic 22px 'Cormorant Garamond',Georgia,serif;color:#8b6c3c}blockquote cite{display:block;font:11px 'DM Sans',Arial,sans-serif;margin-top:6px}.history-item{padding:18px 0;border-bottom:1px solid var(--line)}.history-item:last-child{border:0}.history-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.history-item h3{font:600 24px 'Cormorant Garamond',Georgia,serif;margin:0}.history-item p{font-size:12px;color:var(--muted);margin:6px 0}.history-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.history-actions button{background:transparent;border:1px solid var(--line);padding:6px 11px;font-size:12px;border-radius:3px;color:#77592f}.status-tag{font-size:10px;letter-spacing:.07em;color:var(--sage);text-transform:uppercase}.backup-panel p{font-size:13px;color:var(--muted)}.file-label{display:inline-flex;align-items:center;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.empty{color:var(--muted);font-size:14px;padding:15px 0}footer{text-align:center;background:var(--navy);color:var(--gold-light);font-size:11px;letter-spacing:.18em;padding:30px}footer span{letter-spacing:.07em;color:#c4c6c9;font:italic 16px 'Cormorant Garamond',Georgia,serif}@media(max-width:520px){.masthead{gap:10px}.brandmark{width:40px;height:40px;font-size:22px}.masthead h1{font-size:28px}.eyebrow{font-size:8px}.version{font-size:9px}.prayer-sanctuary{min-height:760px;background-size:auto,125% auto}.prayer-card{min-height:300px}.form-grid{grid-template-columns:1fr 1fr}.btn{padding:11px 14px}.big-timer{font-size:clamp(76px,20vw,110px)}}
+/* ==========================================
+   STEWARDSHIP OS — ORTHODOX SANCTUARY
+   Prayer background
+   ========================================== */
+
+.prayer-sanctuary {
+  position: relative;
+
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(8, 17, 35, 0.28) 0%,
+      rgba(8, 17, 35, 0.48) 45%,
+      rgba(8, 17, 35, 0.78) 100%
+    ),
+    url("assets/Most20Church2012.webp");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  min-height: 740px;
+  color: #fff;
+}
+
+/* Preserve readability over the photograph */
+
+.prayer-card {
+  background: rgba(14, 27, 46, 0.84);
+  border: 1px solid rgba(232, 207, 153, 0.55);
+  border-radius: 6px;
+
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+}
+
+.prayer-text {
+  color: #fffaf0;
+}
+
+.prayer-source,
+.prayer-stage,
+.prayer-reference {
+  color: #e8cf99;
+}
+
+/* Mobile presentation */
+
+@media (max-width: 520px) {
+  .prayer-sanctuary {
+    background-size: cover;
+    background-position: 48% center;
+    min-height: 760px;
+  }
+
+  .prayer-card {
+    background: rgba(14, 27, 46, 0.88);
+  }
+}
