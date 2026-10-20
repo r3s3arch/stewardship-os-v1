@@ -1,47 +1,24 @@
-# Stewardship OS · V1.0
+# Stewardship OS V1.1
 
-A simple, offline-capable prayer, EMOM workout, and daily reflection app.
+Prayer · Toil · Gratitude. A simple offline-capable web app for thirty minutes of prayer, one-exercise EMOM training, and a private daily journal.
 
-## Installation on GitHub Pages
+## Installation / updating GitHub Pages
 
-1. Download and unzip the package.
-2. Open your GitHub repository and **create a NEW branch** (recommended) for V1. Do not delete your previous version.
-3. Upload **all** files from inside the `stewardship-os-v1` folder to the **root of the published branch**, preserving the `assets` folder. `index.html` must be at the root.
-4. In repository **Settings → Pages**, choose **Deploy from a branch**, select the new branch and `/ (root)`, then save.
-5. Open the GitHub Pages URL after deployment completes. Refresh once if the older app remains visible.
-6. To install as an app: open the URL in a supported mobile browser and use **Add to Home Screen** or **Install app**.
+1. Export a backup in Journal before updating.
+2. Extract this ZIP. Open the `stewardship-os-v1` folder inside it.
+3. Upload **the contents** of that folder to the root of your existing `r3s3arch/stewardship-os-v1` repository on the `main` branch, replacing the files of the same names. Keep the `assets` folder.
+4. Wait for GitHub Pages deployment, then reload `https://r3s3arch.github.io/stewardship-os-v1/`. If a cached version remains, close and reopen the app or clear site cache (not site data).
 
-**Important:** GitHub Pages only publishes one configured branch per repository at a time. If you want to keep the previous version publicly accessible while testing, use a separate test repository or test the new branch locally before changing Pages settings.
+**Data protection:** This release uses the same localStorage keys as V1 (`stewardship_os_sanctuary_v1` and `stewardship_os_active_session_v1`). Existing workouts, reflections, and custom exercises remain on the same browser and site origin. Importing a backup **replaces** the local data; do not import unless needed.
 
-## Local testing
+## Changes
+- 26 categorized default movements, including dips and back extensions. Existing custom entries preserved; missing new defaults merged on startup.
+- Repetitions or seconds per minute, with a 59-second maximum for timed intervals.
+- Church interior photograph in Prayer, refined overlay, navigation through prayers, updated footer text.
+- Custom finish-early dialog, exercise name in completion summary, more detailed history.
+- Updated service-worker cache version.
 
-From the folder containing `index.html`, run:
-
-```bash
-python -m http.server 8000
-```
-
-Open `http://localhost:8000`. The app can also be previewed by opening `index.html` directly, but service workers and offline installation require HTTP/HTTPS.
-
-## How it works
-
-- **Prayer:** 30-minute timer with six five-minute sections; pause, resume, restart, optional chime. Prayer remains available without completing a workout.
-- **Toil:** select/create/edit/delete exercises, choose reps per minute and total minutes, optional load and five-second prep, EMOM timer, pause/resume, end early. An interrupted workout is recovered after page reload where browser storage remains intact.
-- **Completion:** review full elapsed rounds, optionally correct actual total repetitions, add optional note, then save. A session stopped early counts only fully elapsed rounds; you can correct the actual total.
-- **Journal:** workout history, repeat workout, edit actual total reps, delete entry; dated autosaved reflections; JSON export/import.
-
-## Privacy and limitations
-
-Data is saved in the current browser's localStorage, **not synchronized** between devices. Export backups periodically. Importing a backup **replaces** existing local data. A private/incognito window or clearing site data may erase records.
-
-Timers use clock deadlines to remain accurate if the page is backgrounded. **Mobile operating systems can silence or delay chimes when the app is locked or backgrounded.** Keep the app open and screen awake if minute cues are essential. Chimes may require an initial tap and are not guaranteed on every device.
-
-The bundled Christ artwork is an **original icon-inspired vector illustration**, not a reproduction of a historically authenticated Orthodox icon. It works entirely offline. If you prefer a specific canonical icon, replace `assets/christ-icon.svg` with appropriately licensed artwork and update the background reference in `styles.css`.
-
-Prayer text includes traditional short prayers and original prayers. Scripture references are short excerpts and are not presented as a complete liturgical prayer rule.
-
-Fonts load from Google Fonts when online and fall back to Georgia/Arial offline. All essential functionality works offline after the app is cached.
-
-## Updating the app
-
-Replace the code files, and change the `CACHE` name in `sw.js` for future releases. **Do not change** the `KEY` storage constant in `app.js` without a migration, or previous entries will appear missing. Export a backup before any update.
+## Notes
+- Previous/next prayer buttons preview prayer text independently of the running countdown; the timed stage returns on resume.
+- For timed exercises, the optional actual-total field records seconds rather than repetitions.
+- The application runs entirely in the browser; use Export Backup periodically.
