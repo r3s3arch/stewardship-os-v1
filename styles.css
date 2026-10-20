@@ -9,3 +9,12 @@
 .review-exercise{font:600 28px 'Cormorant Garamond',Georgia,serif;color:var(--navy);margin:0 0 12px}
 .sanctuary-dialog{max-width:min(420px,calc(100vw - 30px));border:1px solid var(--gold);border-radius:7px;background:#fffdf8;color:var(--ink);padding:28px;box-shadow:0 20px 70px #0008}.sanctuary-dialog::backdrop{background:#0d192bc7}.sanctuary-dialog h2{font:600 33px 'Cormorant Garamond',Georgia,serif;margin:0}.sanctuary-dialog p{font-size:14px}
 @media(max-width:520px){.prayer-sanctuary{background-size:cover;background-position:48% center;min-height:790px}.sanctuary-overlay{padding-top:48px}.prayer-card{background:rgba(14,27,46,.82);min-height:240px}.prayer-text{font-size:clamp(20px,5.5vw,24px)}}
+
+/* V1.3: constrain native date controls within mobile Journal panel. */
+.panel{min-width:0;}
+.panel input[type="date"]{box-sizing:border-box;display:block;width:100%;max-width:100%;min-width:0;}
+@media(max-width:520px){
+  #view-journal .panel{min-width:0;}
+  #reflectionDate{width:100%;max-width:100%;min-width:0;min-height:47px;-webkit-appearance:none;appearance:none;}
+  #reflectionDate::-webkit-date-and-time-value{min-width:0;text-align:left;}
+}

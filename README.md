@@ -30,3 +30,8 @@ Prayer · Toil · Gratitude. A simple offline-capable web app for thirty minutes
 - Preserves journal, reflections, and unknown custom exercises.
 - Shows units on planned workout totals.
 - Uses the existing localStorage key; export a backup before updating.
+
+## V1.3
+- Corrected the Journal date input's mobile overflow using constrained width, min-width, and mobile-native date styling.
+- No application data, storage keys, exercise logic, timers, or Journal behavior changed.
+- Updated the service worker cache version for deployment.
