@@ -1,37 +1,21 @@
-# Stewardship OS V1.1
+# Stewardship OS V1.5 — Spiritual Preparation
 
-Prayer · Toil · Gratitude. A simple offline-capable web app for thirty minutes of prayer, one-exercise EMOM training, and a private daily journal.
+Complete replacement of V1.4, including the entire existing prayer and Scripture library, untimed opening invocations, guided six-stage prayer, EMOM Toil, and Journal.
 
-## Installation / updating GitHub Pages
+## New in V1.5
+- Prepare for the Day tab within Prayer.
+- Prayer for walking in the Spirit.
+- Scripture-grounded six-part Armor of God reflections with one question each.
+- Choose and save one Scripture for the current day; open its full context.
+- Stand Firm collection for real daily struggles.
+- Untimed sending prayer: Go Forth in Grace.
+- Daily Scripture selections included in JSON backups; import supports older V1/V1.4 backups.
 
-1. Export a backup in Journal before updating.
-2. Extract this ZIP. Open the `stewardship-os-v1` folder inside it.
-3. Upload **the contents** of that folder to the root of your existing `r3s3arch/stewardship-os-v1` repository on the `main` branch, replacing the files of the same names. Keep the `assets` folder.
-4. Wait for GitHub Pages deployment, then reload `https://r3s3arch.github.io/stewardship-os-v1/`. If a cached version remains, close and reopen the app or clear site cache (not site data).
+## Deploy
+Extract the ZIP into the root of the existing GitHub Pages repository and replace all files. The existing localStorage key for Journal and workouts is unchanged.
 
-**Data protection:** This release uses the same localStorage keys as V1 (`stewardship_os_sanctuary_v1` and `stewardship_os_active_session_v1`). Existing workouts, reflections, and custom exercises remain on the same browser and site origin. Importing a backup **replaces** the local data; do not import unless needed.
-
-## Changes
-- 26 categorized default movements, including dips and back extensions. Existing custom entries preserved; missing new defaults merged on startup.
-- Repetitions or seconds per minute, with a 59-second maximum for timed intervals.
-- Church interior photograph in Prayer, refined overlay, navigation through prayers, updated footer text.
-- Custom finish-early dialog, exercise name in completion summary, more detailed history.
-- Updated service-worker cache version.
+## Verify
+Check both opening prayers, guided 30-minute prayer, the 40-entry searchable library and favorites, the new Prepare for the Day screen, saving today's Scripture after refresh, workout creation and persistence, Journal reflections, backup export/import, and mobile layout.
 
 ## Notes
-- Previous/next prayer buttons preview prayer text independently of the running countdown; the timed stage returns on resume.
-- For timed exercises, the optional actual-total field records seconds rather than repetitions.
-- The application runs entirely in the browser; use Export Backup periodically.
-
-## V1.2
-
-- Separate category and exercise selection.
-- Migrates recognized legacy default exercises into canonical categories and removes duplicate entries.
-- Preserves journal, reflections, and unknown custom exercises.
-- Shows units on planned workout totals.
-- Uses the existing localStorage key; export a backup before updating.
-
-## V1.3
-- Corrected the Journal date input's mobile overflow using constrained width, min-width, and mobile-native date styling.
-- No application data, storage keys, exercise logic, timers, or Journal behavior changed.
-- Updated the service worker cache version for deployment.
+No accounts or cloud sync. Data is per browser profile; export backups regularly. Scripture links open Bible Gateway and require an internet connection. The application does not imply that completing prayers guarantees protection or outcomes.
