@@ -1,21 +1,15 @@
-# Stewardship OS V1.5 — Spiritual Preparation
+# Stewardship OS V1.6 — Walk with God
 
-Complete replacement of V1.4, including the entire existing prayer and Scripture library, untimed opening invocations, guided six-stage prayer, EMOM Toil, and Journal.
+Full GitHub Pages replacement package. Unzip and upload all contents to the repository root.
 
-## New in V1.5
-- Prepare for the Day tab within Prayer.
-- Prayer for walking in the Spirit.
-- Scripture-grounded six-part Armor of God reflections with one question each.
-- Choose and save one Scripture for the current day; open its full context.
-- Stand Firm collection for real daily struggles.
-- Untimed sending prayer: Go Forth in Grace.
-- Daily Scripture selections included in JSON backups; import supports older V1/V1.4 backups.
+- Prayer & Reflection is untimed and has no six-stage sequence.
+- Walk with God — Genesis 5:24 opens free prayer.
+- Original two invocations plus 15 Scripture-based Holy Spirit prayer options.
+- Explore the Word expands the V1.5 library from 40 to 60 curated entries and preserves, favorites, Scripture links, and thoughtful questions.
+- Optional original-language and Christian historical study resource links; no imposed interpretation.
+- Heavenly Stillness: original synthesized instrumental soundscape (short seamless repeating loop, not a 20–30-minute unique recording); off by default. No commercial music licensed or bundled.
+- Toil EMOM, Journal, backup, and Prepare for the Day retained.
 
-## Deploy
-Extract the ZIP into the root of the existing GitHub Pages repository and replace all files. The existing localStorage key for Journal and workouts is unchanged.
+Privacy: device-only localStorage. Export a backup before clearing browser data.
 
-## Verify
-Check both opening prayers, guided 30-minute prayer, the 40-entry searchable library and favorites, the new Prepare for the Day screen, saving today's Scripture after refresh, workout creation and persistence, Journal reflections, backup export/import, and mobile layout.
-
-## Notes
-No accounts or cloud sync. Data is per browser profile; export backups regularly. Scripture links open Bible Gateway and require an internet connection. The application does not imply that completing prayers guarantees protection or outcomes.
+Music: This bundled audio is a newly synthesized ambient approximation. For a human-performed harp/woodwind recording, audition Pixabay tracks and verify license terms before bundling them.

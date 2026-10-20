@@ -399,5 +399,205 @@ const PRAYER_LIBRARY=[
     "question": "What does John claim about the Word before describing His coming into the world?",
     "context": "John 1:1–18",
     "related": "Genesis 1; Colossians 1:15–20"
-  }
+  },
+{
+  "id": "word-41",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Ask for the Spirit",
+  "scripture": "Luke 11:9–13",
+  "prayer": "Father, You know how to give good gifts. Teach me to ask with trust, to seek with patience, and to receive the Holy Spirit with humility. Amen.",
+  "question": "What does Jesus’ comparison between earthly parents and the Father reveal about prayer?",
+  "context": "Luke 11:1–13",
+  "related": "James 1:5–8; Acts 2:37–39"
+},
+{
+  "id": "word-42",
+  "category": "Prayer & Life in the Spirit",
+  "title": "The Spirit Helps Us Pray",
+  "scripture": "Romans 8:26–27",
+  "prayer": "Holy Spirit, meet me in weakness, even when I cannot find words. Let my prayers be shaped by the will of God rather than my fear. Amen.",
+  "question": "What does this passage say the Spirit does when our words fail?",
+  "context": "Romans 8:18–30",
+  "related": "Psalm 139:1–12; Hebrews 7:25"
+},
+{
+  "id": "word-43",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Teach Me Your Will",
+  "scripture": "Psalm 143:10",
+  "prayer": "Lord, teach me to do Your will. Let Your good Spirit lead me on level ground and correct me when I confuse my preference with Your way. Amen.",
+  "question": "What is the relationship between asking to be taught and being willing to obey?",
+  "context": "Psalm 143",
+  "related": "John 14:26; Romans 12:1–2"
+},
+{
+  "id": "word-44",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Spirit of Wisdom",
+  "scripture": "Ephesians 1:16–19",
+  "prayer": "Father of glory, enlighten the eyes of my heart. Let me know You more truly and understand the hope to which You call Your people. Amen.",
+  "question": "What does Paul pray believers will know beyond simply possessing information?",
+  "context": "Ephesians 1:15–23",
+  "related": "Colossians 1:9–14; Proverbs 2:1–11"
+},
+{
+  "id": "word-45",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Strengthened Within",
+  "scripture": "Ephesians 3:14–19",
+  "prayer": "Father, strengthen me through Your Spirit. Root me in the love of Christ, that my life may be formed by love rather than self-reliance. Amen.",
+  "question": "Why does Paul connect inward strength with knowing the love of Christ?",
+  "context": "Ephesians 3:14–21",
+  "related": "John 15:1–17; 2 Corinthians 4:16–18"
+},
+{
+  "id": "word-46",
+  "category": "Prayer & Life in the Spirit",
+  "title": "The Advocate Teaches",
+  "scripture": "John 14:25–27",
+  "prayer": "Lord Jesus, by Your Spirit teach me to remember Your words and receive Your peace. Keep me from substituting comfort for truth. Amen.",
+  "question": "How is the peace Jesus gives different from the peace the world offers?",
+  "context": "John 14:15–31",
+  "related": "John 16:12–15; Isaiah 26:3"
+},
+{
+  "id": "word-47",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Walk by the Spirit",
+  "scripture": "Galatians 5:16–25",
+  "prayer": "Holy Spirit, lead me away from the desires that enslave and into the freedom of love. Grow Your fruit in my ordinary decisions. Amen.",
+  "question": "How does Paul distinguish the works of the flesh from the fruit of the Spirit?",
+  "context": "Galatians 5",
+  "related": "Romans 8:1–17; John 15:1–8"
+},
+{
+  "id": "word-48",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Fellowship of the Spirit",
+  "scripture": "2 Corinthians 13:11–14",
+  "prayer": "God of peace, teach us to live in the grace of Christ, Your love, and the fellowship of the Holy Spirit. Heal the pride that keeps us apart. Amen.",
+  "question": "What practical instructions surround Paul’s final blessing?",
+  "context": "2 Corinthians 13",
+  "related": "Philippians 2:1–11; Ephesians 4:1–6"
+},
+{
+  "id": "word-49",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Abounding in Hope",
+  "scripture": "Romans 15:13",
+  "prayer": "God of hope, fill me with joy and peace as I trust You. Let the Holy Spirit produce hope that can endure disappointment. Amen.",
+  "question": "How does the surrounding chapter connect hope with welcoming one another?",
+  "context": "Romans 15:1–13",
+  "related": "Isaiah 11:1–10; 1 Peter 1:3–9"
+},
+{
+  "id": "word-50",
+  "category": "Prayer & Life in the Spirit",
+  "title": "Boldness to Speak",
+  "scripture": "Acts 4:23–31",
+  "prayer": "Lord, grant courage to speak Your Word with gentleness and truth. Give me the strength to serve faithfully without seeking attention for myself. Amen.",
+  "question": "What did the early believers ask for when they faced threats?",
+  "context": "Acts 4:1–31",
+  "related": "Acts 2:1–13; 2 Timothy 1:6–8"
+},
+{
+  "id": "word-51",
+  "category": "Wisdom & Discernment",
+  "title": "Test the Spirits",
+  "scripture": "1 John 4:1–6",
+  "prayer": "Father, make me neither gullible nor cynical. Give me discernment rooted in the confession of Jesus Christ and the truth of Your Word. Amen.",
+  "question": "What specific test does John give rather than simply urging suspicion?",
+  "context": "1 John 4:1–12",
+  "related": "1 Thessalonians 5:19–22; Matthew 7:15–20"
+},
+{
+  "id": "word-52",
+  "category": "Wisdom & Discernment",
+  "title": "Wisdom from Above",
+  "scripture": "James 3:13–18",
+  "prayer": "Lord, expose selfish ambition where I call it wisdom. Make my conduct peaceable, gentle, merciful, and sincere. Amen.",
+  "question": "Which qualities distinguish wisdom from above from earthly ambition?",
+  "context": "James 3",
+  "related": "Proverbs 9:1–12; Matthew 5:1–12"
+},
+{
+  "id": "word-53",
+  "category": "Wisdom & Discernment",
+  "title": "Examine Everything",
+  "scripture": "1 Thessalonians 5:19–22",
+  "prayer": "God, keep me open to the Spirit without abandoning discernment. Help me hold fast to what is good and turn away from evil. Amen.",
+  "question": "How can a believer avoid both quenching the Spirit and accepting every claim?",
+  "context": "1 Thessalonians 5:12–24",
+  "related": "Acts 17:10–12; 1 John 4:1–6"
+},
+{
+  "id": "word-54",
+  "category": "Faith, Trust & Obedience",
+  "title": "Walking with God",
+  "scripture": "Genesis 5:21–24",
+  "prayer": "Lord, teach me to walk with You in the ordinary span of my days. Let faithfulness be more than a momentary feeling. Amen.",
+  "question": "What does the brevity of Enoch’s description invite us to consider about a life with God?",
+  "context": "Genesis 5:1–32",
+  "related": "Hebrews 11:5–6; Micah 6:8"
+},
+{
+  "id": "word-55",
+  "category": "Faith, Trust & Obedience",
+  "title": "Walk Humbly",
+  "scripture": "Micah 6:6–8",
+  "prayer": "Lord, turn me from outward display toward justice, mercy, and humble fellowship with You. Amen.",
+  "question": "What does God require in contrast to the escalating offerings listed by the prophet?",
+  "context": "Micah 6:1–16",
+  "related": "Isaiah 1:10–20; Matthew 23:23"
+},
+{
+  "id": "word-56",
+  "category": "Repentance, Humility & Renewal",
+  "title": "Create in Me a Clean Heart",
+  "scripture": "Psalm 51:10–12",
+  "prayer": "Have mercy on me, O God. Renew my heart and teach me repentance that leads to truthful living. Do not cast me away from Your presence. Amen.",
+  "question": "What does David ask God to change within him, beyond the consequences of his sin?",
+  "context": "Psalm 51",
+  "related": "2 Samuel 12:1–15; Luke 18:9–14"
+},
+{
+  "id": "word-57",
+  "category": "Love, Marriage & Family",
+  "title": "Love One Another",
+  "scripture": "John 13:34–35",
+  "prayer": "Lord Jesus, let the love You have shown become visible in the way I treat others, especially when love is costly. Amen.",
+  "question": "How does Jesus make love among disciples a public witness?",
+  "context": "John 13:1–38",
+  "related": "1 John 4:7–21; 1 Corinthians 13"
+},
+{
+  "id": "word-58",
+  "category": "Spiritual Warfare & Perseverance",
+  "title": "Stand in the Lord",
+  "scripture": "Ephesians 6:10–18",
+  "prayer": "Lord, strengthen me in Your might. Clothe my life with truth, righteousness, faith, salvation, and readiness to proclaim peace. Teach me to pray at all times. Amen.",
+  "question": "Why does Paul place prayer alongside the imagery of armor?",
+  "context": "Ephesians 6:10–20",
+  "related": "Isaiah 59:15–21; 2 Corinthians 10:3–5"
+},
+{
+  "id": "word-59",
+  "category": "Suffering, Hope & Eternal Life",
+  "title": "Hope in Suffering",
+  "scripture": "Romans 5:1–5",
+  "prayer": "Father, teach me to persevere without pretending suffering is good in itself. Let Your love, poured into our hearts through the Holy Spirit, sustain hope. Amen.",
+  "question": "What sequence does Paul describe between suffering, endurance, character, and hope?",
+  "context": "Romans 5:1–11",
+  "related": "James 1:2–4; 2 Corinthians 4:7–18"
+},
+{
+  "id": "word-60",
+  "category": "Work, Stewardship & Responsibility",
+  "title": "Work Heartily",
+  "scripture": "Colossians 3:22–24",
+  "prayer": "Lord, help me labor honestly and diligently, remembering that every person I serve bears dignity before You. Amen.",
+  "question": "How does working for the Lord reshape the meaning of ordinary responsibilities?",
+  "context": "Colossians 3:12–4:1",
+  "related": "Ephesians 6:5–9; Psalm 90:17"
+}
 ];
