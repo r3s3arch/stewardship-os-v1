@@ -22,3 +22,11 @@ Prayer · Toil · Gratitude. A simple offline-capable web app for thirty minutes
 - Previous/next prayer buttons preview prayer text independently of the running countdown; the timed stage returns on resume.
 - For timed exercises, the optional actual-total field records seconds rather than repetitions.
 - The application runs entirely in the browser; use Export Backup periodically.
+
+## V1.2
+
+- Separate category and exercise selection.
+- Migrates recognized legacy default exercises into canonical categories and removes duplicate entries.
+- Preserves journal, reflections, and unknown custom exercises.
+- Shows units on planned workout totals.
+- Uses the existing localStorage key; export a backup before updating.
