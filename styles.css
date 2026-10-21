@@ -338,3 +338,9 @@ footer{border-top:1px solid #c59b55!important}
  #view-toil .mode-switch button{min-width:0!important;}
  .heavenly-audio.heavenly-footer{width:100%!important;max-width:100%!important;}
 }
+
+/* V4: Word heading and intro must contrast against the navy background. */
+#libraryPanel > h2,#libraryPanel h2,#libraryPanel > .section-kicker,#libraryPanel > p,#libraryPanel .prepare-intro {color:#fff5e5!important;opacity:1!important;text-shadow:none!important;}
+#libraryPanel > .section-kicker {color:#d9b16b!important;}
+#libraryPanel > p {color:#e8dcc8!important;}
+#libraryPanel .scripture-navigation h3 {color:#142238!important;}

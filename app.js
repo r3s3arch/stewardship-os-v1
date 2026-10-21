@@ -209,15 +209,16 @@ let prayerFavorites=[];try{const stored=JSON.parse(localStorage.getItem(PRAYER_S
 function saveFavorite(id){const set=new Set(prayerFavorites);if(set.has(id))set.delete(id);else set.add(id);prayerFavorites=[...set];try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){alert('Could not save favorite on this device.')}renderLibrary()}
 const cats=['All themes',...new Set(PRAYER_LIBRARY.map(x=>x.category))];for(const c of cats){const opt=document.createElement('option');opt.value=c;opt.textContent=c;$('libraryCategory').append(opt)}
 const BIBLE_PREF_KEY='stewardship_os_next_bible_preferences_v1';
-let biblePrefs={provider:'gateway',translation:'KJV'};
-try{const saved=JSON.parse(localStorage.getItem(BIBLE_PREF_KEY)||'{}');if(['gateway','youversion'].includes(saved.provider))biblePrefs.provider=saved.provider;if(['KJV','ESV','NIV','NASB','NKJV','NLT'].includes(saved.translation))biblePrefs.translation=saved.translation}catch(e){}
+let biblePrefs={provider:'youversion',translation:'KJV'};
+try{const saved=JSON.parse(localStorage.getItem(BIBLE_PREF_KEY)||'{}');if(['youversion','biblehub'].includes(saved.provider))biblePrefs.provider=saved.provider;if(['KJV','ESV','NIV','NASB','NKJV','NLT'].includes(saved.translation))biblePrefs.translation=saved.translation}catch(e){}
 function bibleLink(reference,provider=biblePrefs.provider){
  const ref=String(reference||'').trim();
+ if(provider==='biblehub') return 'https://biblehub.com/search.php?q='+encodeURIComponent(ref);
  if(provider==='youversion'){
   // YouVersion's stable search page accepts a reference without guessing a version-specific passage ID.
   return 'https://www.bible.com/search/bible?q='+encodeURIComponent(ref);
  }
- return 'https://www.biblegateway.com/passage/?search='+encodeURIComponent(ref)+'&version='+encodeURIComponent(biblePrefs.translation);
+ return 'https://www.bible.com/search/bible?q='+encodeURIComponent(ref);
 }
 function saveBiblePrefs(){try{localStorage.setItem(BIBLE_PREF_KEY,JSON.stringify(biblePrefs))}catch(e){}}
 function setupBiblePreferences(){
