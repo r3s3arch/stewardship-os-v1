@@ -24,7 +24,7 @@ function makeInvitation(id,container,contentNodes,anchor){
   anchor.after(button);button.after(body);
   button.addEventListener('click',()=>{
     const open=body.hidden;body.hidden=!open;button.setAttribute('aria-expanded',String(open));
-    cue.textContent=(open?'Close':'Open')+' · '+action+(open?'  ⌃':'  ⌄');
+    cue.textContent=(open?'Close · ':'')+action+(open?'  ⌃':'  ⌄');
     if(open&&id==='temple'&&document.getElementById('workoutActive')&&!document.getElementById('workoutActive').classList.contains('hidden')){
       document.getElementById('workoutActive').scrollIntoView({block:'nearest',behavior:'smooth'});
     }
@@ -40,7 +40,23 @@ function init(){
     const nodes=pick(['invocationMenuToggle','invocationMenu','invocationText','invocationScriptureLink']);
     // Move the containing selector as one unit, retaining existing event handlers.
     const selector=near.querySelector('.invocation-selector');
-    makeInvitation('near',near,[selector,...pick(['invocationText','invocationScriptureLink'])].filter(Boolean),shepherd);
+    const result=makeInvitation('near',near,[selector,...pick(['invocationText','invocationScriptureLink'])].filter(Boolean),shepherd);
+    if(result&&selector){
+      const toggle=document.getElementById('invocationMenuToggle');
+      const menu=document.getElementById('invocationMenu');
+      if(toggle)toggle.hidden=true;
+      result.button.addEventListener('click',()=>{
+        if(menu)menu.classList.toggle('hidden',result.body.hidden);
+        if(toggle)toggle.setAttribute('aria-expanded',String(!result.body.hidden));
+      });
+      menu?.addEventListener('click',e=>{
+        if(e.target.closest('button[data-prayer]')){
+          menu.classList.add('hidden');
+          result.body.hidden=false;
+          result.button.setAttribute('aria-expanded','true');
+        }
+      });
+    }
   }
   const word=document.getElementById('libraryPanel');
   if(word){const art=word.querySelector('.library-art');makeInvitation('word',word,[...word.querySelectorAll('.scripture-navigation, #libraryBrowse, #libraryDetail')],art);}

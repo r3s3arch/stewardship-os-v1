@@ -1,1 +1,5 @@
-Stewardship OS Classic V7. Temple subtitle centered under heading at all widths. Scripture book selector is a persistent 66-book dropdown so users can switch without deleting text; chapter/verse and reference/title updates remain automatic. Includes V6 spacing and Scripture corrections. Browser interaction still requires deployment testing.
+Stewardship OS — Leather & Gold reviewed V9
+
+Built from the V7 source with a minimal audited visual patch, not by repackaging the previously flagged V8 index.html.
+Changes: local SVG leather pattern on page surfaces; gold navigation icons; framed Good Shepherd; combined prayer invitation. Header and footer styling unchanged.
+Security note: Static inspection and syntax checks are not malware certification. Scan with Microsoft Defender before opening.

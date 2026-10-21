@@ -377,3 +377,18 @@ footer{border-top:1px solid #c59b55!important}
 #view-toil .page-intro > .section-kicker {text-align:center!important;}
 #scriptureBook {appearance:auto!important;cursor:pointer!important;}
 @media(max-width:650px){#view-toil .page-intro > p {max-width:calc(100% - 32px)!important;padding-inline:8px!important;}}
+
+/* V9 reviewed leather treatment: */ only the PAGE backgrounds get the quilted leather. Header, tabs,
+   settings, audio bar, and footer keep their original solid navy styling. */
+#view-prayer,#view-toil,#view-journal{background-color:#142238!important;background-image:url("assets/leather-crosses.svg")!important;background-size:190px 190px!important;background-repeat:repeat!important;}
+#invocationPanel,#libraryPanel,#preparePanel{background:transparent!important;}
+#view-toil>.page-intro,#view-journal>.page-intro{background:transparent!important;}
+#invocationPanel .shepherd-art{border:5px ridge #ba8a3f!important;outline:1px solid #e8c784!important;outline-offset:3px!important;box-shadow:0 0 0 7px #15263b,0 15px 32px #0008!important;mask-image:none!important;-webkit-mask-image:none!important;margin:24px auto 22px!important;}
+#invocationPanel .scripture-invitation{margin:18px auto 20px!important;width:min(100%,680px)!important;position:relative;z-index:2;}
+#invocationPanel .invitation-content{margin-top:16px!important;padding-top:4px!important;}
+#invocationPanel .invocation-menu-toggle{display:none!important;}
+#invocationPanel .invocation-selector{width:min(100%,540px)!important;}
+#invocationPanel .invocation-menu{max-height:min(55vh,420px)!important;overflow-y:auto!important;position:relative!important;z-index:10!important;}
+.nav-sacred-icon{width:19px;height:19px;fill:none;stroke:#c59b55;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;vertical-align:middle;}
+.tabs .tab{display:flex;align-items:center;justify-content:center;gap:8px;}
+@media(max-width:600px){.nav-sacred-icon{width:17px;height:17px}#invocationPanel .shepherd-art{margin:22px auto 20px!important}#invocationPanel .scripture-invitation{width:calc(100% - 24px)!important;margin-top:16px!important}}
