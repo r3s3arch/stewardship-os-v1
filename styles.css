@@ -171,3 +171,24 @@ img{max-width:100%}
  .prepare-panel>.walk-landscape{width:calc(100% + 40px);margin:10px -20px -3px;height:auto;max-height:none}
 }
 @media(prefers-reduced-motion:reduce){.invocation-panel .shepherd-art,.library-panel>.library-art,.prepare-panel>.walk-landscape{transition:none}}
+
+/* FINAL ART CONSISTENCY PASS — shared, edge-free presentation */
+.invocation-panel{background:radial-gradient(ellipse 65% 52% at 50% 70%,#263951 0%,#192b41 57%,#142238 100%);padding-bottom:clamp(28px,5vw,48px)}
+.invocation-panel h2{font-size:clamp(44px,7.2vw,70px);letter-spacing:.015em;margin:12px 0 5px}
+.invocation-panel .invocation-subtitle{margin:0 auto 12px;color:#d3a758;font-size:clamp(21px,3.5vw,29px)}
+.invocation-panel .invocation-line{max-width:520px;margin:12px auto 22px;line-height:1.48}
+.invocation-panel .invocation-selector{position:relative;z-index:2}
+.invocation-panel .shepherd-art{width:min(88%,460px);margin:24px auto -14px;-webkit-mask-image:radial-gradient(ellipse 76% 79% at 50% 47%,#000 48%,rgba(0,0,0,.94) 65%,transparent 99%);mask-image:radial-gradient(ellipse 76% 79% at 50% 47%,#000 48%,rgba(0,0,0,.94) 65%,transparent 99%)}
+/* Both Scripture sections use the same visual rhythm: full-bleed image, ivory fade, then content. */
+.library-panel>.library-art,.prepare-panel>.walk-landscape{border:0!important;border-radius:0!important;box-shadow:none!important;outline:0!important;max-width:none;display:block;width:100%;margin:18px auto 0;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 78%,transparent 100%)}
+.library-panel>.library-art{height:clamp(220px,38vw,360px);object-fit:cover;object-position:center 50%}
+.prepare-panel>.walk-landscape{height:clamp(220px,38vw,360px);object-fit:cover;object-position:center 52%}
+.library-panel>.scripture-navigation{margin-top:0}
+.prepare-panel>.personal-walk{margin-top:0}
+@media(max-width:600px){
+ .invocation-panel{padding:26px 17px 35px}
+ .invocation-panel .shepherd-art{width:min(96%,390px);margin:20px auto -10px}
+ .library-panel>.library-art,.prepare-panel>.walk-landscape{width:100%;height:clamp(195px,57vw,290px);margin:15px auto 0}
+ .library-panel>.library-art{object-position:50% 48%}
+ .prepare-panel>.walk-landscape{object-position:42% 52%}
+}
