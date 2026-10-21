@@ -378,8 +378,7 @@ footer{border-top:1px solid #c59b55!important}
 #scriptureBook {appearance:auto!important;cursor:pointer!important;}
 @media(max-width:650px){#view-toil .page-intro > p {max-width:calc(100% - 32px)!important;padding-inline:8px!important;}}
 
-/* V9 reviewed leather treatment: */ only the PAGE backgrounds get the quilted leather. Header, tabs,
-   settings, audio bar, and footer keep their original solid navy styling. */
+/* V10: leather treatment applies to page backgrounds only. Headers, navigation, settings, music and footer remain solid navy. */
 #view-prayer,#view-toil,#view-journal{background-color:#142238!important;background-image:url("assets/leather-crosses.svg")!important;background-size:190px 190px!important;background-repeat:repeat!important;}
 #invocationPanel,#libraryPanel,#preparePanel{background:transparent!important;}
 #view-toil>.page-intro,#view-journal>.page-intro{background:transparent!important;}
@@ -392,3 +391,6 @@ footer{border-top:1px solid #c59b55!important}
 .nav-sacred-icon{width:19px;height:19px;fill:none;stroke:#c59b55;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;vertical-align:middle;}
 .tabs .tab{display:flex;align-items:center;justify-content:center;gap:8px;}
 @media(max-width:600px){.nav-sacred-icon{width:17px;height:17px}#invocationPanel .shepherd-art{margin:22px auto 20px!important}#invocationPanel .scripture-invitation{width:calc(100% - 24px)!important;margin-top:16px!important}}
+
+/* V10: Keep the leather visible even on the Word and My Walk content wrappers. */
+#view-prayer #libraryPanel,#view-prayer #preparePanel{background-color:transparent!important;}
