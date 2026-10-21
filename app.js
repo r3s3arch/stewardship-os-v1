@@ -258,11 +258,21 @@ function pickerChapter(){const value=$('scriptureChapter').value;return /^\d+$/.
 function pickerKey(book,chapter){return book.name+' '+chapter}
 function setVerseInputs(max){
  for(const id of ['scriptureStartVerse','scriptureEndVerse']){
-  const input=$(id);input.disabled=!max;input.max=max||'';
-  if(!max)input.value='';
-  else if(input.value&&(Number(input.value)<1||Number(input.value)>max||!Number.isInteger(Number(input.value))))input.value='';
+  const select=$(id),previous=select.value;
+  select.replaceChildren();
+  const empty=document.createElement('option');empty.value='';empty.textContent=max?(id==='scriptureStartVerse'?'Whole chapter / choose verse':'No ending verse'):'Choose a chapter first';select.append(empty);
+  if(max)for(let n=1;n<=max;n++){const option=document.createElement('option');option.value=String(n);option.textContent='Verse '+n;select.append(option)}
+  select.disabled=!max;
+  if(max&&previous&&Number(previous)<=max)select.value=previous;
  }
 }
+function syncPersonalTitle(){
+ const title=$('personalTitle'),reference=$('personalReference').value.trim();
+ if(!editingPersonalId&&reference&&(!title.value.trim()||title.dataset.auto==='true')){
+  title.value=reference;title.dataset.auto='true';
+ }
+}
+$('personalTitle').addEventListener('input',()=>{$('personalTitle').dataset.auto='false'});
 function verifiedVerseCount(verses){
  if(!Array.isArray(verses)||!verses.length||verses.length>200)return null;
  const numbers=verses.map(v=>Number(v.verse));
@@ -293,7 +303,7 @@ function updateScripturePicker(){
  if(book)for(let n=1;n<=book.chapters;n++){const opt=document.createElement('option');opt.value=String(n);opt.textContent=String(n);chapter.append(opt)}
  chapter.disabled=!book;
  if(book&&previousBook===book.name&&previous&&previous<=book.chapters)chapter.value=String(previous);
- setVerseInputs(null);$('personalReference').value='';
+ setVerseInputs(null);$('personalReference').value='';if(!editingPersonalId&&$('personalTitle').dataset.auto==='true')$('personalTitle').value='';
  $('scripturePickerStatus').textContent=book?'Choose a chapter.':'Choose a Bible book from the suggestions.';
  if(chapter.value)updateScriptureReference();
 }
@@ -301,7 +311,7 @@ async function updateScriptureReference(){
  const token=++scriptureLookupToken,book=pickerBook(),chapter=pickerChapter();
  setVerseInputs(null);$('personalReference').value='';
  if(!book||!chapter||chapter<1||chapter>book.chapters){$('scripturePickerStatus').textContent='Choose a valid book and chapter.';return}
- $('personalReference').value=pickerKey(book,chapter);
+ $('personalReference').value=pickerKey(book,chapter);syncPersonalTitle();
  $('scripturePickerStatus').textContent='Checking available verses… (whole chapter can be saved now)';
  try{
   const count=await loadVerseCount(book,chapter,token);
@@ -320,13 +330,13 @@ function updateVerseRangeReference(){
  const max=Number(startInput.max),start=startInput.value?Number(startInput.value):null,end=endInput.value?Number(endInput.value):null;
  const base=pickerKey(book,chapter);
  const valid=n=>n===null||(Number.isInteger(n)&&n>=1&&n<=max);
- if(startInput.disabled){$('personalReference').value=base;return}
+ if(startInput.disabled){$('personalReference').value=base;syncPersonalTitle();return}
  if(!valid(start)||!valid(end)||(!start&&end)||(start&&end&&end<start)){
   $('personalReference').value='';
   $('scripturePickerStatus').textContent='Invalid verse range. Choose verses from 1–'+max+' with the ending verse at or after the starting verse.';
   return;
  }
- $('personalReference').value=start?base+':'+start+(end&&end!==start?'-'+end:''):base;
+ $('personalReference').value=start?base+':'+start+(end&&end!==start?'-'+end:''):base;syncPersonalTitle();
  $('scripturePickerStatus').textContent='Selected: '+$('personalReference').value;
 }
 $('scriptureBook').addEventListener('input',updateScripturePicker);
@@ -337,7 +347,7 @@ function openPersonalEditor(item=null){
  editingPersonalId=item?.id||null;
  $('personalReference').value=item?.reference||'';
  $('scriptureBook').value='';$('scriptureChapter').value='';updateScripturePicker();$('personalReference').value=item?.reference||'';
- $('personalTitle').value=item?.title||'';
+ $('personalTitle').value=item?.title||'';$('personalTitle').dataset.auto=item?'false':'true';
  $('personalCategory').value=item?.category||'';
  $('personalThought').value=item?.thought||'';
  $('personalPrayer').value=item?.prayer||'';

@@ -344,3 +344,19 @@ footer{border-top:1px solid #c59b55!important}
 #libraryPanel > .section-kicker {color:#d9b16b!important;}
 #libraryPanel > p {color:#e8dcc8!important;}
 #libraryPanel .scripture-navigation h3 {color:#142238!important;}
+
+/* V5: enforce the classic, high-contrast headings in both Scripture views. */
+#libraryPanel > h2, #preparePanel > h2,
+#libraryPanel .cathedral-scene h2, #preparePanel .cathedral-scene h2,
+#libraryPanel > .section-kicker, #preparePanel > .section-kicker {color:#fff5e5!important;opacity:1!important;text-shadow:none!important;}
+#libraryPanel > p, #preparePanel > p, #preparePanel .prepare-intro,
+#libraryPanel .cathedral-scene p, #preparePanel .cathedral-scene p {color:#f0e3cf!important;opacity:1!important;}
+#libraryPanel > .section-kicker, #preparePanel > .section-kicker {color:#d6ad64!important;}
+#invocationPanel h2 {font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;letter-spacing:.025em!important;color:#fff7e8!important;line-height:1.05!important;}
+#invocationPanel .invocation-subtitle {font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;font-style:italic!important;letter-spacing:.01em!important;color:#e2b563!important;}
+#invocationPanel .invocation-line {font-family:'Cormorant Garamond',Georgia,serif!important;color:#fff1db!important;}
+#view-toil > .invitation-content, #view-journal > .invitation-content {margin-top:18px!important;}
+#view-toil .scripture-invitation, #view-journal .scripture-invitation {margin-bottom:0!important;}
+.scripture-picker select {width:100%;min-height:42px;border:1px solid #c7a56f;border-radius:3px;background:#fffdfa;color:#17283d;padding:9px;}
+.scripture-picker select:disabled {opacity:.65;}
+@media(max-width:650px){#view-toil > .invitation-content,#view-journal > .invitation-content{margin-top:14px!important;}}
