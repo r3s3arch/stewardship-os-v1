@@ -360,3 +360,20 @@ footer{border-top:1px solid #c59b55!important}
 .scripture-picker select {width:100%;min-height:42px;border:1px solid #c7a56f;border-radius:3px;background:#fffdfa;color:#17283d;padding:9px;}
 .scripture-picker select:disabled {opacity:.65;}
 @media(max-width:650px){#view-toil > .invitation-content,#view-journal > .invitation-content{margin-top:14px!important;}}
+
+/* V6: breathing room around Scripture page titles, without moving controls. */
+#libraryPanel > .section-kicker, #libraryPanel > h2, #libraryPanel > p,
+#preparePanel > .section-kicker, #preparePanel > h2, #preparePanel > .prepare-intro {margin-left:clamp(18px,4vw,48px)!important;margin-right:clamp(18px,4vw,48px)!important;}
+#libraryPanel > .section-kicker, #preparePanel > .section-kicker {padding-top:16px!important;}
+#libraryPanel > h2, #preparePanel > h2 {line-height:1.12!important;}
+#libraryPanel > p, #preparePanel > .prepare-intro {padding-bottom:10px!important;}
+#scriptureBook {width:100%;min-height:46px;background:#fffdfa;color:#17283d;border:1px solid #c7a56f;border-radius:3px;padding:10px;}
+@media(max-width:600px){#libraryPanel > .section-kicker,#libraryPanel > h2,#libraryPanel > p,#preparePanel > .section-kicker,#preparePanel > h2,#preparePanel > .prepare-intro {margin-left:20px!important;margin-right:20px!important;}}
+
+/* V7: precise alignment and consistent Scripture introduction spacing */
+#view-toil > .page-intro, #view-toil .page-intro {display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;width:100%!important;margin-inline:auto!important;}
+#view-toil .page-intro > p {text-align:center!important;margin:10px auto 0!important;max-width:min(90%,620px)!important;width:100%!important;}
+#view-toil .page-intro > h2 {text-align:center!important;margin-left:auto!important;margin-right:auto!important;}
+#view-toil .page-intro > .section-kicker {text-align:center!important;}
+#scriptureBook {appearance:auto!important;cursor:pointer!important;}
+@media(max-width:650px){#view-toil .page-intro > p {max-width:calc(100% - 32px)!important;padding-inline:8px!important;}}

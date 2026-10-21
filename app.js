@@ -248,7 +248,7 @@ function savePersonalCollection(){try{localStorage.setItem(PERSONAL_KEY,JSON.str
 const SCRIPTURE_BOOKS=[
 ['Genesis',50],['Exodus',40],['Leviticus',27],['Numbers',36],['Deuteronomy',34],['Joshua',24],['Judges',21],['Ruth',4],['1 Samuel',31],['2 Samuel',24],['1 Kings',22],['2 Kings',25],['1 Chronicles',29],['2 Chronicles',36],['Ezra',10],['Nehemiah',13],['Esther',10],['Job',42],['Psalms',150],['Proverbs',31],['Ecclesiastes',12],['Song of Solomon',8],['Isaiah',66],['Jeremiah',52],['Lamentations',5],['Ezekiel',48],['Daniel',12],['Hosea',14],['Joel',3],['Amos',9],['Obadiah',1],['Jonah',4],['Micah',7],['Nahum',3],['Habakkuk',3],['Zephaniah',3],['Haggai',2],['Zechariah',14],['Malachi',4],['Matthew',28],['Mark',16],['Luke',24],['John',21],['Acts',28],['Romans',16],['1 Corinthians',16],['2 Corinthians',13],['Galatians',6],['Ephesians',6],['Philippians',4],['Colossians',4],['1 Thessalonians',5],['2 Thessalonians',3],['1 Timothy',6],['2 Timothy',4],['Titus',3],['Philemon',1],['Hebrews',13],['James',5],['1 Peter',5],['2 Peter',3],['1 John',5],['2 John',1],['3 John',1],['Jude',1],['Revelation',22]];
 const scriptureBookMap=new Map(SCRIPTURE_BOOKS.map(([name,chapters])=>[name.toLowerCase(),{name,chapters}]));
-$('scriptureBookOptions').replaceChildren(...SCRIPTURE_BOOKS.map(([name])=>{const opt=document.createElement('option');opt.value=name;return opt}));
+$('scriptureBook').append(...SCRIPTURE_BOOKS.map(([name])=>{const opt=document.createElement('option');opt.value=name;opt.textContent=name;return opt}));
 const VERSE_COUNT_CACHE_KEY='stewardship_os_vnext_verse_counts';
 let verseCountCache={};
 try{const saved=JSON.parse(localStorage.getItem(VERSE_COUNT_CACHE_KEY)||'{}');if(saved&&typeof saved==='object'&&!Array.isArray(saved))verseCountCache=saved}catch(e){}
@@ -327,7 +327,7 @@ async function updateScriptureReference(){
 function updateVerseRangeReference(){
  const book=pickerBook(),chapter=pickerChapter();if(!book||!chapter)return;
  const startInput=$('scriptureStartVerse'),endInput=$('scriptureEndVerse');
- const max=Number(startInput.max),start=startInput.value?Number(startInput.value):null,end=endInput.value?Number(endInput.value):null;
+ const max=Math.max(0,startInput.options.length-1),start=startInput.value?Number(startInput.value):null,end=endInput.value?Number(endInput.value):null;
  const base=pickerKey(book,chapter);
  const valid=n=>n===null||(Number.isInteger(n)&&n>=1&&n<=max);
  if(startInput.disabled){$('personalReference').value=base;syncPersonalTitle();return}
@@ -339,7 +339,7 @@ function updateVerseRangeReference(){
  $('personalReference').value=start?base+':'+start+(end&&end!==start?'-'+end:''):base;syncPersonalTitle();
  $('scripturePickerStatus').textContent='Selected: '+$('personalReference').value;
 }
-$('scriptureBook').addEventListener('input',updateScripturePicker);
+$('scriptureBook').addEventListener('change',updateScripturePicker);
 $('scriptureChapter').addEventListener('change',updateScriptureReference);
 $('scriptureStartVerse').addEventListener('input',updateVerseRangeReference);
 $('scriptureEndVerse').addEventListener('input',updateVerseRangeReference);
