@@ -14,3 +14,7 @@ Complete replacement ZIP for GitHub Pages. Extract and upload the files into the
 Existing storage key `stewardship_os_sanctuary_v1` and prior favorite keys remain. Personal Scripture data uses `stewardship_os_personal_scriptures_v2` and is included in backup export/import. Export a backup before installing. Browser-local data does not sync between devices.
 
 JavaScript syntax and ZIP integrity checked; live browser testing is still recommended.
+
+
+## Visual correction preview (2026-10-21)
+Includes approved responsive layout corrections to Draw Near, The Word, My Walk, Temple, Gratitude, and footer music. Browser interaction testing remains outstanding due to restricted local browser navigation.
