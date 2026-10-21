@@ -210,3 +210,23 @@ img{max-width:100%}
 #view-toil .invitation-content,#view-journal .invitation-content{max-width:960px;margin:auto}
 @media(max-width:600px){.scripture-invitation{width:calc(100% - 20px);padding:.85rem .6rem;min-height:74px}.invitation-quote{font-size:.94rem}#libraryPanel .library-art,#preparePanel .walk-landscape{max-height:300px;object-fit:cover}#invocationPanel .shepherd-art{max-width:min(80vw,310px)}.invitation-content{padding-inline:0}#view-toil .mode-switch{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#view-toil .mode-switch button{min-width:0;width:100%}}
 @media(prefers-reduced-motion:reduce){.invitation-content{animation:none}}
+/* Cathedral architecture, extracted from approved sanctuary visual reference. */
+.app-shell{max-width:1120px}
+.cathedral-scene{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;min-height:640px;padding:clamp(145px,17vw,205px) clamp(100px,17%,205px) 35px!important;margin:0 auto;background:radial-gradient(ellipse at 50% 45%,#263b51,#14263c 60%,#0b1829);color:#f9edda;text-align:center;overflow:hidden}
+.cathedral-scene::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('assets/cathedral-arch-desktop.png') center/100% 100% no-repeat}
+.cathedral-scene::after{content:"";position:absolute;inset:auto 0 0;height:75px;z-index:-1;background:linear-gradient(transparent,#142238)}
+.cathedral-scene>*{position:relative;z-index:1;max-width:100%;flex-shrink:0}
+.cathedral-scene h2,.cathedral-scene .page-intro h2{font:500 clamp(35px,5vw,62px)/1.05 'Cormorant Garamond',Georgia,serif;color:#fff2dd!important;margin:0 0 6px}
+.cathedral-scene .section-kicker{color:#e9c77e!important}
+.cathedral-scene p,.cathedral-scene .prepare-intro,.cathedral-scene .page-intro>p{color:#f4e6d0;max-width:480px;margin:8px auto 14px}
+.cathedral-scene .shepherd-art{width:min(100%,365px)!important;max-height:370px!important;height:auto!important;object-fit:contain!important;margin:8px auto 0!important;filter:drop-shadow(0 0 24px #b68b4528)}
+.cathedral-scene .library-art,.cathedral-scene .walk-landscape{display:block;width:min(100%,580px)!important;max-width:100%!important;height:clamp(170px,25vw,290px)!important;object-fit:cover!important;margin:12px auto 0!important;border:0!important;mask-image:linear-gradient(transparent,#000 10%,#000 78%,transparent)!important;-webkit-mask-image:linear-gradient(transparent,#000 10%,#000 78%,transparent)!important}
+.cathedral-scene .scripture-invitation{width:min(100%,500px);margin:12px auto 0;min-height:68px;background:#10223de8;border:1px solid #d2a759;box-shadow:0 0 0 2px #09172d,0 9px 25px #0006}
+.cathedral-scene .page-intro{padding:0!important;background:transparent!important}
+#invocationPanel{padding:0!important;background:#142238!important;min-height:0!important}
+#libraryPanel,#preparePanel{padding:0!important}
+#libraryPanel>.invitation-content,#preparePanel>.invitation-content{padding:22px clamp(14px,4vw,38px)}
+#view-toil>.cathedral-scene,#view-journal>.cathedral-scene{min-height:370px;padding-top:160px!important;padding-bottom:35px!important}
+#view-toil>.invitation-content,#view-journal>.invitation-content{padding:16px 0}
+@media(max-width:650px){.cathedral-scene{min-height:570px;padding:125px 63px 24px!important}.cathedral-scene::before{background-image:url('assets/cathedral-arch-mobile.png')}.cathedral-scene h2,.cathedral-scene .page-intro h2{font-size:clamp(33px,8vw,47px)}.cathedral-scene .invocation-line{font-size:clamp(17px,4.5vw,22px);line-height:1.3}.cathedral-scene .shepherd-art{width:min(100%,250px)!important;max-height:275px!important}.cathedral-scene .library-art,.cathedral-scene .walk-landscape{height:clamp(165px,44vw,250px)!important}.cathedral-scene .scripture-invitation{padding:8px 6px;width:100%;min-height:65px}.cathedral-scene .invitation-quote{font-size:clamp(12px,3.1vw,16px)}#view-toil>.cathedral-scene,#view-journal>.cathedral-scene{min-height:350px;padding-top:145px!important}}
+@media(max-width:390px){.cathedral-scene{padding-inline:48px!important}.cathedral-scene .shepherd-art{max-height:235px!important}}
