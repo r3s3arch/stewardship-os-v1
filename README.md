@@ -1,1 +1,3 @@
-Stewardship OS — cathedral layering correction. The Word and My Walk photos are removed from page markup. The Good Shepherd is retained. Cathedral PNGs are positioned above the navy background with no navy overlay. Functional application scripts remain unchanged. Browser rendering requires user verification.
+Stewardship OS — Classic Navy & Gold Test
+
+Restores unillustrated navy/gold landing pages; Good Shepherd remains on Draw Near with prayer selector always available. The Word retains the category browser and includes a Choose a new verse for My Walk button, which opens the existing validated book/chapter/verse selector. Temple and Gratitude remain accessible behind their Scripture invitations. Music and settings background now navy. No migration of older data is required. Browser interaction testing still required.
