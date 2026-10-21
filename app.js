@@ -141,13 +141,33 @@ const SPIRIT_INVITATIONS=[
 ['Power, Love, Self-Control','2 Timothy 1:6–7','Lord, strengthen me to serve without fear, with power, love, and self-control. Amen.']
 ];
 for(let i=0;i<SPIRIT_INVITATIONS.length;i++){const [title,ref,body]=SPIRIT_INVITATIONS[i];INVOCATIONS['scripture-'+i]={title,text:body,source:'Prayer inspired by Scripture · '+ref+' · Read the passage in context'};}
-for(let i=0;i<SPIRIT_INVITATIONS.length;i++){const option=document.createElement('option');option.value='scripture-'+i;option.textContent=SPIRIT_INVITATIONS[i][0]+' · '+SPIRIT_INVITATIONS[i][1];$('scripturePrayerSelect').append(option)}
-let invocationCleared=false, invocationChoice='traditional',prayerMode='guided',librarySelected=null,libraryOnlySaved=false;
-function renderInvocation(){const i=INVOCATIONS[invocationChoice];$('invocationText').replaceChildren();const title=document.createElement('h3');title.textContent=i.title;const body=document.createElement('p');body.textContent=i.text;const source=document.createElement('small');source.textContent=i.source;$('invocationText').append(title,body,source);$('invokeTraditional').classList.toggle('selected',invocationChoice==='traditional');$('invokeOriginal').classList.toggle('selected',invocationChoice==='original');const select=$('scripturePrayerSelect');if(select)select.value=invocationChoice.startsWith('scripture-')?invocationChoice:'';const link=$('invocationScriptureLink');if(link){const found=SPIRIT_INVITATIONS[Number(invocationChoice.split('-')[1])];link.classList.toggle('hidden',!invocationChoice.startsWith('scripture-'));if(found){link.href=bibleLink(found[1]);link.textContent='Read '+found[1]+' in Scripture ↗'}}}
+let invocationCleared=false, invocationChoice=null,prayerMode='guided',librarySelected=null,libraryOnlySaved=false;
+function renderInvocation(){
+ const article=$('invocationText'),link=$('invocationScriptureLink');
+ if(!invocationChoice){article.classList.add('hidden');link.classList.add('hidden');$('invocationMenuToggle').innerHTML='Invite the Holy Spirit <span aria-hidden="true">⌄</span>';return;}
+ const i=INVOCATIONS[invocationChoice];article.classList.remove('hidden');article.replaceChildren();
+ const title=document.createElement('h3');title.textContent=i.title;
+ const body=document.createElement('p');body.textContent=i.text;
+ const source=document.createElement('small');source.textContent=i.source;
+ article.append(title,body,source);
+ $('invocationMenuToggle').replaceChildren(document.createTextNode(i.title+'  '));const arrow=document.createElement('span');arrow.textContent='⌄';arrow.setAttribute('aria-hidden','true');$('invocationMenuToggle').append(arrow);
+ const found=invocationChoice.startsWith('scripture-')?SPIRIT_INVITATIONS[Number(invocationChoice.split('-')[1])]:null;
+ link.classList.toggle('hidden',!found);if(found){link.href=bibleLink(found[1]);link.textContent='Read '+found[1]+' in Scripture ↗'}
+ for(const btn of $('invocationMenu').querySelectorAll('button[data-prayer]')){btn.setAttribute('aria-current',String(btn.dataset.prayer===invocationChoice))}
+}
+function buildInvocationMenu(){
+ const menu=$('invocationMenu');menu.replaceChildren();
+ const group=(name)=>{const heading=document.createElement('div');heading.className='invocation-menu-group';heading.textContent=name;menu.append(heading)};
+ const add=(key,title,ref)=>{const button=document.createElement('button');button.type='button';button.className='invocation-menu-option';button.dataset.prayer=key;button.textContent=title;const tag=document.createElement('small');tag.textContent=ref;button.append(tag);button.addEventListener('click',()=>{invocationChoice=key;renderInvocation();menu.classList.add('hidden');$('invocationMenuToggle').setAttribute('aria-expanded','false')});menu.append(button)};
+ group('Traditional & original prayers');add('traditional','O Heavenly King','Traditional Orthodox prayer');add('original','Come, Holy Spirit','Stewardship OS original');
+ group('Prayers inspired by Scripture');SPIRIT_INVITATIONS.forEach((v,i)=>add('scripture-'+i,v[0],v[1]));
+}
+$('invocationMenuToggle').addEventListener('click',()=>{const open=$('invocationMenu').classList.toggle('hidden')===false;$('invocationMenuToggle').setAttribute('aria-expanded',String(open))});
+buildInvocationMenu();
 function showInvocation(){prayerMode='guided';$('invocationPanel').classList.remove('hidden');$('libraryPanel').classList.add('hidden');$('preparePanel').classList.add('hidden');setModeButtons();renderInvocation()}
 function setModeButtons(){for(const [mode,id] of [['guided','modeGuided'],['library','modeLibrary'],['saved','modeSaved'],['prepare','modePrepare']]){$(id).classList.toggle('selected',prayerMode===mode)}}
 function setPrayerMode(mode){prayerMode=mode;setModeButtons();$('preparePanel').classList.toggle('hidden',mode!=='prepare');$('invocationPanel').classList.toggle('hidden',mode!=='guided');$('libraryPanel').classList.toggle('hidden',mode!=='library'&&mode!=='saved');if(mode==='guided')renderInvocation();if(mode==='library'||mode==='saved'){libraryOnlySaved=mode==='saved';renderLibrary()}}
-$('invokeTraditional').addEventListener('click',()=>{invocationChoice='traditional';renderInvocation()});$('invokeOriginal').addEventListener('click',()=>{invocationChoice='original';renderInvocation()});$('scripturePrayerSelect').addEventListener('change',e=>{if(e.target.value){invocationChoice=e.target.value;renderInvocation()}});$('modeGuided').addEventListener('click',()=>setPrayerMode('guided'));$('modeLibrary').addEventListener('click',()=>setPrayerMode('library'));$('modeSaved').addEventListener('click',()=>setPrayerMode('saved'));$('modePrepare').addEventListener('click',()=>setPrayerMode('prepare'));
+$('modeGuided').addEventListener('click',()=>setPrayerMode('guided'));$('modeLibrary').addEventListener('click',()=>setPrayerMode('library'));$('modeSaved').addEventListener('click',()=>setPrayerMode('saved'));$('modePrepare').addEventListener('click',()=>setPrayerMode('prepare'));
 const PRAYER_SAVED_KEY='stewardship_os_prayer_favorites_v1';
 let prayerFavorites=[];try{const stored=JSON.parse(localStorage.getItem(PRAYER_SAVED_KEY)||'[]');if(Array.isArray(stored))prayerFavorites=stored.filter(x=>typeof x==='string')}catch(e){}
 function saveFavorite(id){const set=new Set(prayerFavorites);if(set.has(id))set.delete(id);else set.add(id);prayerFavorites=[...set];try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){alert('Could not save favorite on this device.')}renderLibrary()}
