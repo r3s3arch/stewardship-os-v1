@@ -249,3 +249,40 @@ img{max-width:100%}
 @media(max-width:650px) {
  #invocationPanel .cathedral-scene::before {background-image:url('assets/draw-near-arch-mobile.png') !important;}
 }
+
+/* Cathedral layering correction — common to all five sanctuary pages. */
+.cathedral-scene {
+  position:relative!important;
+  isolation:isolate!important;
+  background:#14263c!important;
+  overflow:hidden;
+}
+.cathedral-scene::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('assets/cathedral-arch-desktop.png') center center / 100% 100% no-repeat!important;
+  z-index:2!important;
+  opacity:1!important;
+  pointer-events:none;
+}
+.cathedral-scene::after {display:none!important;}
+.cathedral-scene > * {position:relative;z-index:3!important;}
+/* Only the approved Good Shepherd painting is retained in the sanctuary. */
+.cathedral-scene .library-art,.cathedral-scene .walk-landscape{display:none!important;}
+#invocationPanel .cathedral-scene::before {
+  background-image:url('assets/draw-near-arch-desktop.png')!important;
+}
+/* Clear, restrained text compositions where photographs were removed. */
+#libraryPanel .cathedral-scene, #preparePanel .cathedral-scene {
+  justify-content:center;
+  gap:clamp(7px,1.5vw,16px);
+}
+#libraryPanel .cathedral-scene h2, #preparePanel .cathedral-scene h2 {margin:0!important;}
+#libraryPanel .cathedral-scene .scripture-invitation,
+#preparePanel .cathedral-scene .scripture-invitation {margin-top:clamp(16px,3vw,28px)!important;}
+@media(max-width:650px){
+ .cathedral-scene::before {background-image:url('assets/cathedral-arch-mobile.png')!important;}
+ #invocationPanel .cathedral-scene::before {background-image:url('assets/draw-near-arch-mobile.png')!important;}
+ #libraryPanel .cathedral-scene,#preparePanel .cathedral-scene{min-height:450px!important;}
+}
