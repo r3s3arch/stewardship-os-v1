@@ -192,3 +192,21 @@ img{max-width:100%}
  .library-panel>.library-art{object-position:50% 48%}
  .prepare-panel>.walk-landscape{object-position:42% 52%}
 }
+
+
+/* Scripture invitations: mobile-first, accessible, non-destructive disclosure */
+.scripture-invitation{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.38rem;width:min(100%,680px);margin:1.2rem auto 1.45rem;padding:.8rem 1.1rem;background:linear-gradient(135deg,#102037,#1c2f46);border:1px solid #c49a52;border-radius:3px;color:#f5dfae;box-shadow:0 0 0 3px rgba(12,28,47,.55),0 8px 30px rgba(0,0,0,.14);cursor:pointer;text-align:center;white-space:normal;line-height:1.4;min-height:66px}
+.scripture-invitation:hover,.scripture-invitation:focus-visible{border-color:#f0ce85;background:#213651;outline-offset:4px}
+.invitation-quote{font-family:Georgia,serif;font-size:clamp(.91rem,2.3vw,1.14rem);font-style:italic;color:#f7e6c2}
+.invitation-source{font-size:.75rem;letter-spacing:.08em;color:#dfb66d}
+.invitation-cue{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:#e3c995}
+.invitation-content[hidden]{display:none!important}
+.invitation-content{width:100%;animation:sanctuaryReveal .25s ease-out}
+@keyframes sanctuaryReveal{from{opacity:.3;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
+/* Maintain imagery as the initial experience without covering it with forms */
+#invocationPanel .shepherd-art{display:block;margin:1rem auto;max-width:min(100%,390px);height:auto;object-fit:contain}
+#libraryPanel .library-art,#preparePanel .walk-landscape{display:block;width:min(100%,960px);max-width:100%;height:auto;max-height:440px;object-fit:cover;margin:1rem auto 0;border:0}
+#view-toil .scripture-invitation,#view-journal .scripture-invitation{margin-top:2rem}
+#view-toil .invitation-content,#view-journal .invitation-content{max-width:960px;margin:auto}
+@media(max-width:600px){.scripture-invitation{width:calc(100% - 20px);padding:.85rem .6rem;min-height:74px}.invitation-quote{font-size:.94rem}#libraryPanel .library-art,#preparePanel .walk-landscape{max-height:300px;object-fit:cover}#invocationPanel .shepherd-art{max-width:min(80vw,310px)}.invitation-content{padding-inline:0}#view-toil .mode-switch{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#view-toil .mode-switch button{min-width:0;width:100%}}
+@media(prefers-reduced-motion:reduce){.invitation-content{animation:none}}
