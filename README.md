@@ -1,13 +1,16 @@
-# Stewardship OS V1.9 — Complete replacement package
+# Stewardship OS V2.0 — Prayer · Temple · Gratitude
 
-Upload all files from this ZIP into the root of the existing GitHub Pages repository. You do **not** need to install V1.8 or V1.8.1 first.
+Complete replacement ZIP for GitHub Pages. Extract and upload the files into the repository root.
 
-## Included
-- V1.8.1's simplified **Come, Holy Spirit.** prayer selection and revised invitation text.
-- 110 original Scripture reflection entries (50 new), each with a passage, prayer, one question, context reading and related references.
-- Study the Text: Hebrew/Aramaic for Hebrew Bible passages; Koine Greek and Syriac translation resources for New Testament passages.
-- Wisdom Through the Ages: passage-family-specific historical authors and work collections, transparently labeled; not direct quotes or guaranteed passage-level commentary.
-- The approved original Harp & Chamber Strings soundscape with on/off, volume and looping.
-- Existing Toil, Journal, favorites, Carry the Word, Prepare for the Day and localStorage keys preserved.
+- Main pillars: Prayer · Temple · Gratitude.
+- Prayer navigation: Draw Near · The Word · My Walk. Standalone Saved tab removed.
+- My Walk contains daily spiritual preparation and a personal Scripture collection with custom references, go-to markers, personal reflections and prayers. Existing favorites appear automatically.
+- The Word supports saving passages and adding personal reflections.
+- Temple supports original EMOM and a Traditional workout log with sets, repetitions, weights, optional duration/rest timers, and multi-exercise sessions.
+- Traditional sessions appear in shared workout history, with repeat, edit and delete actions.
+- Music bar moved just above footer; existing approved recording retained for now.
+- Removed the “untimed and optional” sentence.
 
-**Note:** Historical links are research starting points and may link to collections, not individual passages. No claims of exact quotations are made. Export your Journal backup before replacing files.
+Existing storage key `stewardship_os_sanctuary_v1` and prior favorite keys remain. Personal Scripture data uses `stewardship_os_personal_scriptures_v2` and is included in backup export/import. Export a backup before installing. Browser-local data does not sync between devices.
+
+JavaScript syntax and ZIP integrity checked; live browser testing is still recommended.

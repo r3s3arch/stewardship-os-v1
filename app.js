@@ -110,9 +110,9 @@ let noteTimer=null;function renderReflection(){const date=$('reflectionDate').va
 function saveReflection(){const date=$('reflectionDate').value||todayISO();data.reflections[date]={gratitude:$('gratitudeNote').value,heart:$('heartNote').value,intention:$('intentionNote').value};if(persist())text($('autosaveStatus'),'Saved on this device.')}
 $('reflectionDate').value=todayISO();$('reflectionDate').addEventListener('change',()=>{clearTimeout(noteTimer);renderReflection()});['gratitudeNote','heartNote','intentionNote'].forEach(id=>$(id).addEventListener('input',()=>{text($('autosaveStatus'),'Saving…');clearTimeout(noteTimer);noteTimer=setTimeout(saveReflection,300)}));
 function renderJournal(){renderHistory()}
-function renderHistory(){const list=$('historyList');list.replaceChildren();if(!data.workouts.length){const p=document.createElement('p');p.className='empty';p.textContent='Your completed workouts will appear here. Begin with one faithful minute.';list.append(p);return}data.workouts.forEach(w=>{const item=document.createElement('article');item.className='history-item';const top=document.createElement('div');top.className='history-top';const heading=document.createElement('h3');heading.textContent=w.exercise;const tag=document.createElement('span');tag.className='status-tag';tag.textContent=w.completed?'Completed':'Ended early';top.append(heading,tag);item.append(top);const p=document.createElement('p');const d=new Date(w.date);p.textContent=`${isNaN(d)?w.date:d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})} · ${w.completedRounds}/${w.plannedMinutes} rounds · ${Math.floor((w.elapsedSeconds||0)/60)}m ${(w.elapsedSeconds||0)%60}s · ${w.repsPerMinute} ${w.unit==='seconds'?'sec':'reps'}/min · ${w.actualReps} total ${w.unit==='seconds'?'sec':'reps'}${w.actualEdited?' (corrected)':' (estimate)'}${w.load?' · '+w.load:''}`;item.append(p);if(w.note){const note=document.createElement('p');note.textContent=w.note;item.append(note)}const actions=document.createElement('div');actions.className='history-actions';const repeat=document.createElement('button');repeat.textContent='Repeat workout';repeat.addEventListener('click',()=>{if(workout||review){alert('Finish or discard your current workout first.');return}renderExerciseSelect(w.exerciseId);if(!data.exercises.some(e=>e.id===w.exerciseId)){const match=data.exercises.find(e=>e.name===w.exercise);if(match)renderExerciseSelect(match.id)} $('repsInput').value=w.repsPerMinute;$('minutesInput').value=w.plannedMinutes;$('unitSelect').value=w.unit||'reps';updateUnitLabel();$('loadInput').value=w.load||'';updatePreview();showView('toil')});const edit=document.createElement('button');edit.textContent='Edit record';edit.addEventListener('click',()=>{const value=prompt(w.unit==='seconds'?'Actual total seconds:':'Actual total repetitions:',w.actualReps);if(value===null)return;const n=safeInt(value,0,1000000);if(n===null){alert('Enter a whole number from 0 to 1,000,000.');return}w.actualReps=n;w.actualEdited=true;persist();renderHistory()});const del=document.createElement('button');del.textContent='Delete';del.addEventListener('click',()=>{if(!confirm('Delete this journal entry permanently?'))return;data.workouts=data.workouts.filter(x=>x.id!==w.id);persist();renderHistory()});actions.append(repeat,edit,del);item.append(actions);list.append(item)})}
-$('exportData').addEventListener('click',()=>{saveReflection();const blob=new Blob([JSON.stringify({format:'stewardship-os-v1',exportedAt:new Date().toISOString(),data,prayerFavorites,dailyScripture:readDailyScripture()},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`stewardship-os-backup-${todayISO()}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);text($('backupStatus'),'Backup downloaded. Store it somewhere safe.')});
-$('importData').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>5*1024*1024)throw Error('Backup file is too large.');const obj=JSON.parse(await file.text());if(obj.format!=='stewardship-os-v1'||!obj.data||!Array.isArray(obj.data.exercises)||!Array.isArray(obj.data.workouts)||!obj.data.reflections||typeof obj.data.reflections!=='object')throw Error('Not a valid Stewardship OS V1 backup.');if(!confirm('Importing will REPLACE the workout journal, exercise library, and reflections on this device. Continue?'))return;data=obj.data;if(!persist())return;if(obj.dailyScripture&&typeof obj.dailyScripture==='object')restoreDailyScripture(obj.dailyScripture);if(Array.isArray(obj.prayerFavorites)){prayerFavorites=obj.prayerFavorites.filter(x=>typeof x==='string');try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){}}data=mergeDefaults(data);persist();renderExerciseSelect();renderReflection();renderHistory();text($('backupStatus'),'Backup imported successfully.')}catch(err){text($('backupStatus'),'Import failed: '+err.message)}finally{e.target.value=''}});
+function renderHistory(){const list=$('historyList');list.replaceChildren();if(!data.workouts.length){const p=document.createElement('p');p.className='empty';p.textContent='Your completed workouts will appear here. Begin with one faithful minute.';list.append(p);return}data.workouts.forEach(w=>{const item=document.createElement('article');item.className='history-item';const top=document.createElement('div');top.className='history-top';const heading=document.createElement('h3');heading.textContent=w.exercise;const tag=document.createElement('span');tag.className='status-tag';tag.textContent=w.completed?'Completed':'Ended early';top.append(heading,tag);item.append(top);const p=document.createElement('p');const d=new Date(w.date);p.textContent=`${isNaN(d)?w.date:d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})} · ${w.completedRounds}/${w.plannedMinutes} rounds · ${Math.floor((w.elapsedSeconds||0)/60)}m ${(w.elapsedSeconds||0)%60}s · ${w.repsPerMinute} ${w.unit==='seconds'?'sec':'reps'}/min · ${w.actualReps} total ${w.unit==='seconds'?'sec':'reps'}${w.actualEdited?' (corrected)':' (estimate)'}${w.load?' · '+w.load:''}`;item.append(p);if(w.type==='traditional'){p.textContent=`${new Date(w.date).toLocaleDateString()} · Traditional · ${(w.entries||[]).length} exercise(s) · ${w.durationMinutes||0} min`;const details=document.createElement('p');details.textContent=(w.entries||[]).map(e=>`${e.exercise}: ${e.sets} × ${e.reps}${e.weight?' · '+e.weight:''}`).join('  |  ');item.append(details)}if(w.note){const note=document.createElement('p');note.textContent=w.note;item.append(note)}const actions=document.createElement('div');actions.className='history-actions';const repeat=document.createElement('button');repeat.textContent='Repeat workout';repeat.addEventListener('click',()=>{if(w.type==='traditional'){showView('toil');setTrainingMode('traditional');traditionalEntries=(w.entries||[]).map(e=>({...e}));renderTraditionalEntries();return}if(workout||review){alert('Finish or discard your current workout first.');return}renderExerciseSelect(w.exerciseId);if(!data.exercises.some(e=>e.id===w.exerciseId)){const match=data.exercises.find(e=>e.name===w.exercise);if(match)renderExerciseSelect(match.id)} $('repsInput').value=w.repsPerMinute;$('minutesInput').value=w.plannedMinutes;$('unitSelect').value=w.unit||'reps';updateUnitLabel();$('loadInput').value=w.load||'';updatePreview();showView('toil')});const edit=document.createElement('button');edit.textContent='Edit record';edit.addEventListener('click',()=>{if(w.type==='traditional'){editingTraditionalRecord=w.id;traditionalEntries=(w.entries||[]).map(e=>({...e}));$('traditionalDuration').value=w.durationMinutes||0;$('traditionalNotes').value=w.note||'';renderTraditionalEntries();showView('toil');setTrainingMode('traditional');$('traditionalStatus').textContent='Editing saved session. Update the entries and save again.';return}const value=prompt(w.unit==='seconds'?'Actual total seconds:':'Actual total repetitions:',w.actualReps);if(value===null)return;const n=safeInt(value,0,1000000);if(n===null){alert('Enter a whole number from 0 to 1,000,000.');return}w.actualReps=n;w.actualEdited=true;persist();renderHistory()});const del=document.createElement('button');del.textContent='Delete';del.addEventListener('click',()=>{if(!confirm('Delete this journal entry permanently?'))return;data.workouts=data.workouts.filter(x=>x.id!==w.id);persist();renderHistory()});actions.append(repeat,edit,del);item.append(actions);list.append(item)})}
+$('exportData').addEventListener('click',()=>{saveReflection();const blob=new Blob([JSON.stringify({format:'stewardship-os-v1',exportedAt:new Date().toISOString(),data,prayerFavorites,personalPassages,dailyScripture:readDailyScripture()},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`stewardship-os-backup-${todayISO()}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);text($('backupStatus'),'Backup downloaded. Store it somewhere safe.')});
+$('importData').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>5*1024*1024)throw Error('Backup file is too large.');const obj=JSON.parse(await file.text());if(obj.format!=='stewardship-os-v1'||!obj.data||!Array.isArray(obj.data.exercises)||!Array.isArray(obj.data.workouts)||!obj.data.reflections||typeof obj.data.reflections!=='object')throw Error('Not a valid Stewardship OS V1 backup.');if(!confirm('Importing will REPLACE the workout journal, exercise library, and reflections on this device. Continue?'))return;data=obj.data;if(!persist())return;if(obj.dailyScripture&&typeof obj.dailyScripture==='object')restoreDailyScripture(obj.dailyScripture);if(Array.isArray(obj.personalPassages)){personalPassages=obj.personalPassages.filter(p=>p&&typeof p.reference==='string');savePersonalCollection()}if(Array.isArray(obj.prayerFavorites)){prayerFavorites=obj.prayerFavorites.filter(x=>typeof x==='string');try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){}}data=mergeDefaults(data);persist();renderExerciseSelect();renderReflection();renderHistory();renderPersonal();text($('backupStatus'),'Backup imported successfully.')}catch(err){text($('backupStatus'),'Import failed: '+err.message)}finally{e.target.value=''}});
 // Keep time accurate after tab changes; store active workout on every pause/resume.
 setInterval(()=>{renderPrayer();if(workout)renderWorkout()},200);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){renderPrayer();if(workout)renderWorkout()}});
@@ -165,17 +165,159 @@ function buildInvocationMenu(){
 $('invocationMenuToggle').addEventListener('click',()=>{const open=$('invocationMenu').classList.toggle('hidden')===false;$('invocationMenuToggle').setAttribute('aria-expanded',String(open))});
 buildInvocationMenu();
 function showInvocation(){prayerMode='guided';$('invocationPanel').classList.remove('hidden');$('libraryPanel').classList.add('hidden');$('preparePanel').classList.add('hidden');setModeButtons();renderInvocation()}
-function setModeButtons(){for(const [mode,id] of [['guided','modeGuided'],['library','modeLibrary'],['saved','modeSaved'],['prepare','modePrepare']]){$(id).classList.toggle('selected',prayerMode===mode)}}
-function setPrayerMode(mode){prayerMode=mode;setModeButtons();$('preparePanel').classList.toggle('hidden',mode!=='prepare');$('invocationPanel').classList.toggle('hidden',mode!=='guided');$('libraryPanel').classList.toggle('hidden',mode!=='library'&&mode!=='saved');if(mode==='guided')renderInvocation();if(mode==='library'||mode==='saved'){libraryOnlySaved=mode==='saved';renderLibrary()}}
-$('modeGuided').addEventListener('click',()=>setPrayerMode('guided'));$('modeLibrary').addEventListener('click',()=>setPrayerMode('library'));$('modeSaved').addEventListener('click',()=>setPrayerMode('saved'));$('modePrepare').addEventListener('click',()=>setPrayerMode('prepare'));
+function setModeButtons(){for(const [mode,id] of [['guided','modeGuided'],['library','modeLibrary'],['prepare','modePrepare']]){$(id).classList.toggle('selected',prayerMode===mode)}}
+function setPrayerMode(mode){prayerMode=mode;setModeButtons();$('preparePanel').classList.toggle('hidden',mode!=='prepare');$('invocationPanel').classList.toggle('hidden',mode!=='guided');$('libraryPanel').classList.toggle('hidden',mode!=='library');if(mode==='guided')renderInvocation();if(mode==='library'){libraryOnlySaved=false;renderLibrary()}}
+$('modeGuided').addEventListener('click',()=>setPrayerMode('guided'));$('modeLibrary').addEventListener('click',()=>setPrayerMode('library'));$('modePrepare').addEventListener('click',()=>setPrayerMode('prepare'));
 const PRAYER_SAVED_KEY='stewardship_os_prayer_favorites_v1';
 let prayerFavorites=[];try{const stored=JSON.parse(localStorage.getItem(PRAYER_SAVED_KEY)||'[]');if(Array.isArray(stored))prayerFavorites=stored.filter(x=>typeof x==='string')}catch(e){}
 function saveFavorite(id){const set=new Set(prayerFavorites);if(set.has(id))set.delete(id);else set.add(id);prayerFavorites=[...set];try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){alert('Could not save favorite on this device.')}renderLibrary()}
 const cats=['All themes',...new Set(PRAYER_LIBRARY.map(x=>x.category))];for(const c of cats){const opt=document.createElement('option');opt.value=c;opt.textContent=c;$('libraryCategory').append(opt)}
 function bibleLink(reference){return 'https://www.biblegateway.com/passage/?search='+encodeURIComponent(reference)}
 function renderLibrary(){const q=$('librarySearch').value.trim().toLowerCase(),cat=$('libraryCategory').value;const items=PRAYER_LIBRARY.filter(x=>(!libraryOnlySaved||prayerFavorites.includes(x.id))&&(cat==='All themes'||x.category===cat)&&(!q||[x.title,x.category,x.scripture,x.prayer,x.question,x.context,x.related].join(' ').toLowerCase().includes(q)));$('libraryCount').textContent=items.length+' '+(items.length===1?'reflection':'reflections')+(libraryOnlySaved?' saved':'');$('libraryResults').replaceChildren();for(const x of items){const b=document.createElement('button');b.type='button';b.className='library-item'+(librarySelected===x.id?' active':'');const catLabel=document.createElement('small');catLabel.textContent=x.category;const name=document.createElement('strong');name.textContent=x.title;const verse=document.createElement('span');verse.textContent=x.scripture;b.append(catLabel,name,verse);b.addEventListener('click',()=>{librarySelected=x.id;renderLibrary();$('libraryDetail').scrollIntoView({behavior:'smooth',block:'nearest'})});$('libraryResults').append(b)}if(!items.length){const empty=document.createElement('p');empty.textContent=libraryOnlySaved?'No saved prayers match these filters. Explore the Word to add some.':'No passages match your search.';$('libraryResults').append(empty)}const chosen=items.find(x=>x.id===librarySelected);$('libraryDetail').replaceChildren();$('libraryDetail').classList.toggle('hidden',!chosen);if(!chosen)return;
-const heading=document.createElement('h3');heading.textContent=chosen.title;const ref=document.createElement('p');ref.className='library-scripture';ref.textContent=chosen.scripture;const pl=document.createElement('div');pl.className='panel-label';pl.textContent='PRAYER';const prayerText=document.createElement('p');prayerText.className='library-prayer';prayerText.textContent=chosen.prayer;const cl=document.createElement('div');cl.className='panel-label';cl.textContent='CONSIDER';const question=document.createElement('p');question.className='library-question';question.textContent=chosen.question;const rl=document.createElement('div');rl.className='panel-label';rl.textContent='READ IN CONTEXT';const context=document.createElement('a');context.className='library-link';context.href=bibleLink(chosen.context);context.target='_blank';context.rel='noopener noreferrer';context.textContent=chosen.context+' ↗';const further=document.createElement('p');further.className='library-further';further.textContent='Read further: '+chosen.related;const buttons=document.createElement('div');buttons.className='button-row';const save=document.createElement('button');save.className='btn secondary';save.textContent=prayerFavorites.includes(chosen.id)?'♥ Saved — Remove':'♡ Save Prayer';save.addEventListener('click',()=>saveFavorite(chosen.id));const read=document.createElement('a');read.className='btn primary';read.href=bibleLink(chosen.scripture);read.target='_blank';read.rel='noopener noreferrer';read.textContent='Open Scripture ↗';buttons.append(save,read);$('libraryDetail').append(heading,ref,pl,prayerText,cl,question,rl,context,further,buttons)}
+const heading=document.createElement('h3');heading.textContent=chosen.title;const ref=document.createElement('p');ref.className='library-scripture';ref.textContent=chosen.scripture;const pl=document.createElement('div');pl.className='panel-label';pl.textContent='PRAYER';const prayerText=document.createElement('p');prayerText.className='library-prayer';prayerText.textContent=chosen.prayer;const cl=document.createElement('div');cl.className='panel-label';cl.textContent='CONSIDER';const question=document.createElement('p');question.className='library-question';question.textContent=chosen.question;const rl=document.createElement('div');rl.className='panel-label';rl.textContent='READ IN CONTEXT';const context=document.createElement('a');context.className='library-link';context.href=bibleLink(chosen.context);context.target='_blank';context.rel='noopener noreferrer';context.textContent=chosen.context+' ↗';const further=document.createElement('p');further.className='library-further';further.textContent='Read further: '+chosen.related;const buttons=document.createElement('div');buttons.className='button-row';const save=document.createElement('button');save.className='btn secondary';save.textContent=prayerFavorites.includes(chosen.id)?'♥ In My Walk — Remove':'♡ Save to My Walk';save.addEventListener('click',()=>{saveFavorite(chosen.id);renderPersonal()});const reflect=document.createElement('button');reflect.className='btn subtle';reflect.textContent='Add my thoughts';reflect.addEventListener('click',()=>{saveToMyWalk(chosen);setPrayerMode('prepare')});const read=document.createElement('a');read.className='btn primary';read.href=bibleLink(chosen.scripture);read.target='_blank';read.rel='noopener noreferrer';read.textContent='Open Scripture ↗';buttons.append(save,reflect,read);$('libraryDetail').append(heading,ref,pl,prayerText,cl,question,rl,context,further,buttons)}
 $('librarySearch').addEventListener('input',()=>{librarySelected=null;renderLibrary()});$('libraryCategory').addEventListener('change',()=>{librarySelected=null;renderLibrary()});
 // Preserve existing backup format while including the independent favorites collection.
 
 renderInvocation();showInvocation();
+
+
+// V2: Personal Scripture collection. Saved favorites from prior releases remain valid.
+const PERSONAL_KEY='stewardship_os_personal_scriptures_v2';
+let personalPassages=[];
+try{const stored=JSON.parse(localStorage.getItem(PERSONAL_KEY)||'[]');if(Array.isArray(stored))personalPassages=stored.filter(x=>x&&typeof x.reference==='string')}catch(e){}
+let editingPersonalId=null;
+function savePersonalCollection(){try{localStorage.setItem(PERSONAL_KEY,JSON.stringify(personalPassages));return true}catch(e){alert('Unable to save your Scripture collection. Export a backup.');return false}}
+function openPersonalEditor(item=null){
+ editingPersonalId=item?.id||null;
+ $('personalReference').value=item?.reference||'';
+ $('personalTitle').value=item?.title||'';
+ $('personalCategory').value=item?.category||'';
+ $('personalThought').value=item?.thought||'';
+ $('personalPrayer').value=item?.prayer||'';
+ $('personalGoTo').checked=!!item?.goTo;
+ $('personalEditor').classList.remove('hidden');
+ $('personalReference').focus();
+}
+function saveToMyWalk(entry){
+ const item=personalPassages.find(p=>p.libraryId===entry.id);
+ if(!prayerFavorites.includes(entry.id)){prayerFavorites.push(entry.id);try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){}}
+ openPersonalEditor(item||{libraryId:entry.id,reference:entry.scripture,title:entry.title,category:entry.category});
+}
+function renderPersonal(){
+ const q=$('personalFilter').value.trim().toLowerCase(),list=$('personalList');
+ list.replaceChildren();
+ const all=[...personalPassages];
+ for(const id of prayerFavorites){
+  const lib=PRAYER_LIBRARY.find(x=>x.id===id);
+  if(lib&&!all.some(x=>x.libraryId===id))all.push({id:'favorite-'+id,libraryId:id,reference:lib.scripture,title:lib.title,category:lib.category,thought:'',prayer:'',goTo:false});
+ }
+ all.sort((a,b)=>Number(!!b.goTo)-Number(!!a.goTo));
+ const filtered=all.filter(x=>[x.reference,x.title,x.category,x.thought,x.prayer].join(' ').toLowerCase().includes(q));
+ if(!filtered.length){const msg=document.createElement('p');msg.className='hint';msg.textContent='Your saved and personal passages will appear here.';list.append(msg);return}
+ for(const item of filtered){
+  const card=document.createElement('article');card.className='personal-entry';
+  const h=document.createElement('h4');h.textContent=(item.goTo?'✦ ':'')+(item.title||item.reference);
+  const ref=document.createElement('p');ref.className='library-scripture';ref.textContent=item.reference;
+  card.append(h,ref);
+  if(item.category){const cat=document.createElement('small');cat.textContent=item.category;card.append(cat)}
+  if(item.thought){const note=document.createElement('p');note.textContent=item.thought;card.append(note)}
+  if(item.prayer){const prayer=document.createElement('p');prayer.textContent='My prayer: '+item.prayer;card.append(prayer)}
+  const row=document.createElement('div');row.className='button-row';
+  const edit=document.createElement('button');edit.className='btn secondary';edit.textContent='Edit thoughts';edit.addEventListener('click',()=>openPersonalEditor(item));
+  const read=document.createElement('a');read.className='btn subtle';read.textContent='Read Scripture ↗';read.href=bibleLink(item.reference);read.target='_blank';read.rel='noopener noreferrer';
+  const remove=document.createElement('button');remove.className='btn subtle';remove.textContent='Remove';remove.addEventListener('click',()=>{
+   if(!confirm('Remove this passage from My Walk?'))return;
+   personalPassages=personalPassages.filter(x=>x.id!==item.id&&x.libraryId!==item.libraryId);
+   if(item.libraryId){prayerFavorites=prayerFavorites.filter(id=>id!==item.libraryId);try{localStorage.setItem(PRAYER_SAVED_KEY,JSON.stringify(prayerFavorites))}catch(e){}}
+   savePersonalCollection();renderPersonal();
+  });
+  row.append(edit,read,remove);card.append(row);list.append(card);
+ }
+}
+$('addPersonalPassage').addEventListener('click',()=>openPersonalEditor());
+$('cancelPersonalPassage').addEventListener('click',()=>$('personalEditor').classList.add('hidden'));
+$('savePersonalPassage').addEventListener('click',()=>{
+ const reference=$('personalReference').value.trim();if(!reference){alert('Enter a Scripture reference.');return}
+ const old=personalPassages.find(x=>x.id===editingPersonalId);
+ const libId=old?.libraryId||(editingPersonalId?.startsWith('favorite-')?editingPersonalId.slice(9):null);
+ const item={id:old?.id||'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),libraryId:libId||null,reference,title:$('personalTitle').value.trim(),category:$('personalCategory').value.trim(),thought:$('personalThought').value,prayer:$('personalPrayer').value,goTo:$('personalGoTo').checked};
+ if(old)Object.assign(old,item);else personalPassages.push(item);
+ if(savePersonalCollection()){$('personalEditor').classList.add('hidden');renderPersonal()}
+});
+$('personalFilter').addEventListener('input',renderPersonal);
+$('openMyWalk').addEventListener('click',()=>setPrayerMode('prepare'));
+$('modePrepare').addEventListener('click',renderPersonal);
+renderPersonal();
+
+// Temple: traditional workout log with optional timer, sharing workout history with EMOM.
+let editingTraditionalRecord=null;let trainingMode='emom',traditionalEntries=[],traditionalSeconds=0,traditionalRunning=false,traditionalLast=0;
+function setTrainingMode(mode){
+ trainingMode=mode;
+ $('workoutSetup').classList.toggle('hidden',mode!=='emom');
+ $('traditionalPanel').classList.toggle('hidden',mode!=='traditional');
+ $('trainingEmom').classList.toggle('selected',mode==='emom');
+ $('trainingTraditional').classList.toggle('selected',mode==='traditional');
+}
+$('trainingTraditional').addEventListener('click',()=>setTrainingMode('traditional'));
+$('trainingEmom').addEventListener('click',()=>setTrainingMode('emom'));
+function traditionalSettings(){
+ const sets=safeInt($('traditionalSets').value,0,1000),reps=safeInt($('traditionalReps').value,0,10000);
+ const duration=safeInt($('traditionalDuration').value,0,1440),rest=safeInt($('traditionalRest').value,0,3600);
+ if([sets,reps,duration,rest].some(v=>v===null))return null;
+ return {exercise:$('traditionalExercise').value.trim(),sets,reps,weight:$('traditionalWeight').value.trim(),duration,rest};
+}
+function renderTraditionalEntries(){
+ const list=$('traditionalEntries');list.replaceChildren();
+ for(let i=0;i<traditionalEntries.length;i++){
+  const e=traditionalEntries[i],row=document.createElement('div');row.className='personal-entry';
+  const label=document.createElement('p');label.textContent=`${e.exercise} · ${e.sets} sets × ${e.reps} reps${e.weight?' · '+e.weight:''}`;
+  const remove=document.createElement('button');remove.className='btn subtle';remove.textContent='Remove';remove.addEventListener('click',()=>{traditionalEntries.splice(i,1);renderTraditionalEntries()});
+  row.append(label,remove);list.append(row);
+ }
+}
+$('traditionalAdd').addEventListener('click',()=>{
+ const e=traditionalSettings();
+ if(!e||!e.exercise){$('traditionalStatus').textContent='Enter an exercise and valid numbers.';return}
+ traditionalEntries.push(e);$('traditionalStatus').textContent='Exercise added. Add another or save your session.';renderTraditionalEntries();
+});
+$('traditionalSave').addEventListener('click',()=>{
+ let entries=traditionalEntries.slice();
+ const current=traditionalSettings();
+ if(current?.exercise&&!entries.length)entries.push(current);
+ if(!entries.length){$('traditionalStatus').textContent='Add at least one exercise to save.';return}
+ const totalMinutes=safeInt($('traditionalDuration').value,0,1440);
+ if(totalMinutes===null){$('traditionalStatus').textContent='Enter a valid duration.';return}
+ const record={id:editingTraditionalRecord||'traditional-'+Date.now(),type:'traditional',exercise:entries.length===1?entries[0].exercise:'Traditional workout',date:new Date().toISOString(),entries,durationMinutes:totalMinutes,elapsedSeconds:traditionalSeconds,note:$('traditionalNotes').value.trim(),completed:true};
+ if(editingTraditionalRecord)data.workouts=data.workouts.filter(w=>w.id!==editingTraditionalRecord);
+ if(editingTraditionalRecord)data.workouts=data.workouts.filter(w=>w.id!==editingTraditionalRecord);
+ data.workouts.unshift(record);
+ if(!persist()){data.workouts.shift();return}
+ traditionalEntries=[];editingTraditionalRecord=null;renderTraditionalEntries();traditionalRunning=false;
+ $('traditionalStatus').textContent='Session saved to your workout history.';
+ renderHistory();
+});
+function formatTraditional(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function traditionalInitial(){
+ const mode=$('traditionalTimerMode').value;
+ if(mode==='countdown')return Math.max(0,Number($('traditionalDuration').value)||0)*60;
+ if(mode==='rest')return Math.max(0,Number($('traditionalRest').value)||0);
+ return 0;
+}
+function displayTraditional(){$('traditionalClock').textContent=formatTraditional(Math.max(0,Math.floor(traditionalSeconds)))}
+$('traditionalTimerMode').addEventListener('change',()=>{traditionalRunning=false;traditionalSeconds=traditionalInitial();displayTraditional()});
+$('traditionalStart').addEventListener('click',()=>{
+ if($('traditionalTimerMode').value==='none'){$('traditionalStatus').textContent='Choose a timer mode, or simply log your workout.';return}
+ if(!traditionalRunning){traditionalLast=Date.now();traditionalRunning=true}
+});
+$('traditionalPause').addEventListener('click',()=>{traditionalRunning=false;displayTraditional()});
+$('traditionalReset').addEventListener('click',()=>{traditionalRunning=false;traditionalSeconds=traditionalInitial();displayTraditional()});
+setInterval(()=>{
+ if(!traditionalRunning)return;
+ const now=Date.now(),delta=(now-traditionalLast)/1000;traditionalLast=now;
+ if(['countdown','rest'].includes($('traditionalTimerMode').value)){
+  traditionalSeconds=Math.max(0,traditionalSeconds-delta);
+  if(traditionalSeconds===0){traditionalRunning=false;$('traditionalStatus').textContent='Timer complete.'}
+ }else traditionalSeconds+=delta;
+ displayTraditional();
+},250);
+displayTraditional();

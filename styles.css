@@ -45,3 +45,8 @@
 .invocation-menu-option{display:block;width:100%;border:0;border-top:1px solid #ffffff16;background:transparent;color:#fff7e8;padding:11px 15px;text-align:left;font:600 20px 'Cormorant Garamond',Georgia,serif;cursor:pointer}
 .invocation-menu-option:hover,.invocation-menu-option:focus-visible,.invocation-menu-option[aria-current="true"]{background:#b9956033}
 .invocation-menu-option small{display:block;font:11px system-ui,sans-serif;color:#d8c5a8;margin-top:3px}
+/* V2.0: quiet utility placement and restrained personal/training panels */
+.heavenly-footer{margin:3rem auto .5rem;max-width:760px;padding:.6rem .85rem;opacity:.82;border:1px solid rgba(174,147,96,.22);border-radius:12px;background:transparent;box-shadow:none}
+.heavenly-footer strong{font-size:.84rem;font-weight:500}.heavenly-footer .btn{font-size:.78rem;padding:.4rem .7rem}.heavenly-footer label{font-size:.75rem}
+.personal-walk{margin:1.6rem 0}.personal-walk h3{margin:.3rem 0}.personal-list{display:grid;gap:.75rem;margin-top:1rem}.personal-entry{padding:1rem;border:1px solid rgba(142,115,75,.24);border-radius:10px;background:rgba(255,255,255,.035)}.personal-entry h4{margin:0 0 .4rem}.personal-entry p{white-space:pre-wrap}.personal-entry .button-row{margin-top:.8rem}
+.mode-switch{display:flex;gap:.5rem;justify-content:center;margin:1rem 0}.mode-switch .mode-btn{flex:1;max-width:260px}.traditional-timer{padding:1rem 0;text-align:center}.traditional-timer .big-timer{font-size:clamp(2.2rem,8vw,4.3rem)}
