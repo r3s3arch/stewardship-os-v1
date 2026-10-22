@@ -1,1 +1,19 @@
-const CACHE = 'stewardship-v12-quilt-icons';const ASSETS=['./','./index.html','./styles.css','./app.js','./backup-core.js','./prayer-library.js','./study.js','./sanctuary-invitations.js','./cathedral-layout.js','./assets/cathedral-arch-desktop.png','./assets/cathedral-arch-mobile.png','./assets/forest-morning-serenity.mp3','./assets/my-walk-landscape.png','./assets/good-shepherd-approved.png','./assets/christian-library-approved.png','./assets/byzantine-frame-reference.png','./manifest.webmanifest','./assets/leather-crosses.svg','./assets/icon.svg','./assets/christ-icon.svg','./assets/Most20Church2012.webp'];self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',event=>{if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(c=>c.put(event.request,copy))}return response}).catch(()=>caches.match(event.request).then(r=>r||caches.match('./index.html'))))});
+"use strict";
+// V14 development cache: only the app shell is mandatory for installation.
+const CACHE = 'stewardship-os-v14-0-dev';
+const SHELL = ['./','./index.html','./styles.css','./app.js','./backup-core.js','./prayer-library.js','./study.js','./sanctuary-invitations.js','./classic-layout.js','./preparation.js','./manifest.webmanifest','./assets/icon.svg','./assets/good-shepherd-approved.png'];
+self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())); });
+self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('stewardship-') && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())); });
+self.addEventListener('fetch', event => {
+ const request = event.request;
+ if(request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
+ event.respondWith(fetch(request).then(response => {
+   if(response.ok && response.type === 'basic') { const copy=response.clone(); event.waitUntil(caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{})); }
+   return response;
+ }).catch(async () => {
+   const cached=await caches.match(request);
+   if(cached) return cached;
+   if(request.mode === 'navigate') return (await caches.match('./index.html')) || Response.error();
+   return Response.error();
+ }));
+});
