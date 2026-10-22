@@ -1,10 +1,10 @@
 "use strict";
-// V14.1: cache the actual app shell, including its versioned resource URLs.
-const CACHE='stewardship-os-v14-1-dev';
-const SHELL=['./','./index.html','./styles.css?v=20261022-v14-1-dev',
- './app.js?v=20261022-v14-1-dev','./study.js?v=20261022-v14-1-dev',
- './sanctuary-invitations.js?v=20261022-v14-1-dev',
- './classic-layout.js?v=20261022-v14-1-dev','./backup-core.js',
+// V14.2: cache the actual app shell, including its versioned resource URLs.
+const CACHE='stewardship-os-v14-2-dev';
+const SHELL=['./','./index.html','./styles.css?v=20261022-v14-2-dev',
+ './app.js?v=20261022-v14-2-dev','./study.js?v=20261022-v14-2-dev',
+ './sanctuary-invitations.js?v=20261022-v14-2-dev',
+ './classic-layout.js?v=20261022-v14-2-dev','./backup-core.js',
  './prayer-library.js','./manifest.webmanifest','./assets/icon.svg',
  './assets/good-shepherd-approved.png','./assets/leather-crosses.svg'];
 self.addEventListener('install',event=>{

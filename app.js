@@ -253,6 +253,8 @@ const VERSE_COUNT_CACHE_KEY='stewardship_os_vnext_verse_counts';
 let verseCountCache={};
 try{const saved=JSON.parse(localStorage.getItem(VERSE_COUNT_CACHE_KEY)||'{}');if(saved&&typeof saved==='object'&&!Array.isArray(saved))verseCountCache=saved}catch(e){}
 let scriptureLookupToken=0;
+let scriptureLookupPending=false;
+let scriptureLookupRetryTimer=null;
 function pickerBook(){return scriptureBookMap.get($('scriptureBook').value.trim().toLowerCase())}
 function pickerChapter(){const value=$('scriptureChapter').value;return /^\d+$/.test(value)?Number(value):null}
 function pickerKey(book,chapter){return book.name+' '+chapter}
@@ -309,6 +311,8 @@ function updateScripturePicker(){
 }
 async function updateScriptureReference(){
  const token=++scriptureLookupToken,book=pickerBook(),chapter=pickerChapter();
+ scriptureLookupPending=false;
+ if(scriptureLookupRetryTimer){clearTimeout(scriptureLookupRetryTimer);scriptureLookupRetryTimer=null;}
  setVerseInputs(null);$('personalReference').value='';
  if(!book||!chapter||chapter<1||chapter>book.chapters){$('scripturePickerStatus').textContent='Choose a valid book and chapter.';return}
  $('personalReference').value=pickerKey(book,chapter);syncPersonalTitle();
@@ -316,12 +320,15 @@ async function updateScriptureReference(){
  try{
   const count=await loadVerseCount(book,chapter,token);
   if(token!==scriptureLookupToken)return;
+  scriptureLookupPending=false;
   setVerseInputs(count);
   $('scripturePickerStatus').textContent='Verses 1–'+count+' available. Leave both verse fields empty to save the whole chapter.';
   updateVerseRangeReference();
  }catch(e){
   if(token!==scriptureLookupToken)return;
-  $('scripturePickerStatus').textContent='Verse lookup unavailable. You can save the whole chapter; reconnect to select verses.';
+  scriptureLookupPending=true;
+  $('scripturePickerStatus').textContent='Verse lookup temporarily unavailable. Whole-chapter saving remains available; verse lookup will retry when connected.';
+  if(navigator.onLine){scriptureLookupRetryTimer=setTimeout(()=>{if(scriptureLookupPending&&token===scriptureLookupToken)updateScriptureReference()},15000);}
  }
 }
 function updateVerseRangeReference(){
@@ -339,6 +346,9 @@ function updateVerseRangeReference(){
  $('personalReference').value=start?base+':'+start+(end&&end!==start?'-'+end:''):base;syncPersonalTitle();
  $('scripturePickerStatus').textContent='Selected: '+$('personalReference').value;
 }
+window.addEventListener('online',()=>{
+ if(scriptureLookupPending&&pickerBook()&&pickerChapter())updateScriptureReference();
+});
 $('scriptureBook').addEventListener('change',updateScripturePicker);
 $('scriptureChapter').addEventListener('change',updateScriptureReference);
 $('scriptureStartVerse').addEventListener('input',updateVerseRangeReference);
