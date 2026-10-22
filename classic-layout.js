@@ -1,6 +1,7 @@
 (function(){'use strict';function init(){
 // Open the prayer selector immediately; preserve the Good Shepherd and prayer library.
-const near=document.getElementById('invocationPanel');if(near){const invite=near.querySelector('.scripture-invitation');const content=near.querySelector('.invitation-content');if(invite)invite.hidden=true;if(content){content.hidden=false;content.style.display='block';}}
+// The Draw Near invitation is controlled exclusively by sanctuary-invitations.js.
+// Do not hide its button or force its content open here.
 // Scripture browse remains visible, not hidden behind a second navigation step.
 for(const id of ['libraryPanel','preparePanel']){const root=document.getElementById(id);if(!root)continue;const button=root.querySelector('.scripture-invitation'),body=root.querySelector('.invitation-content');if(button)button.hidden=true;if(body){body.hidden=false;body.style.display='block';}}
 const add=document.getElementById('wordAddPersonalPassage');

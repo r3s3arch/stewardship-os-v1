@@ -42,18 +42,22 @@ function init(){
     const selector=near.querySelector('.invocation-selector');
     const result=makeInvitation('near',near,[selector,...pick(['invocationText','invocationScriptureLink'])].filter(Boolean),shepherd);
     if(result&&selector){
+      // One visible control owns the disclosure state. Never toggle the menu
+      // independently of the body (the former caused intermittent two-click opens).
       const toggle=document.getElementById('invocationMenuToggle');
       const menu=document.getElementById('invocationMenu');
       if(toggle)toggle.hidden=true;
       result.button.addEventListener('click',()=>{
-        if(menu)menu.classList.toggle('hidden',result.body.hidden);
-        if(toggle)toggle.setAttribute('aria-expanded',String(!result.body.hidden));
+        const open=!result.body.hidden;
+        if(menu)menu.classList.toggle('hidden',!open);
+        if(toggle)toggle.setAttribute('aria-expanded',String(open));
       });
       menu?.addEventListener('click',e=>{
         if(e.target.closest('button[data-prayer]')){
           menu.classList.add('hidden');
           result.body.hidden=false;
           result.button.setAttribute('aria-expanded','true');
+          result.button.querySelector('.invitation-cue').textContent='Close · Enter Prayer  ⌃';
         }
       });
     }
